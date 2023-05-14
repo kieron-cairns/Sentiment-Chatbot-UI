@@ -36,3 +36,57 @@
     transform: rotate(360deg);
   }
 }
+
+.chatbot-container {
+  display: flex;
+  height: 100vh; /* Set the container height to 100vh */
+}
+
+.side-menu {
+  width: 30vh;
+  background-color: #1F2123;
+  padding: 0px;
+  height: 100vh; /* Set the height to 100vh */
+  overflow-y: hidden; /* Disable scrolling within SideMenu */
+  color: white;
+}
+
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex-grow: 1; /* Take up remaining space */
+  overflow-x: hidden;
+  background-color: #454654; /* Default background color */
+  width: 100vh;
+}
+
+.chat-window.bot-response {
+  background-color: #444653; /* Background color for bot response */
+}
+
+.chatbot-messages {
+  flex-grow: 1;
+  background-color: #454654;
+  overflow-y: auto;
+  color: white;
+  font-size: 20px;
+}
+
+.chatbot-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: #454654;
+}
+
+.chatbot-form input[type="text"] {
+  width: 100vh;
+  height: 40px;
+  padding: 5px;
+  font-size: 16px;
+  background-color: #454654;
+}
+
+/* Rest of your custom styles */
