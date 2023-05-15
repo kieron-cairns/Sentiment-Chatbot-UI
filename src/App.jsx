@@ -36,10 +36,41 @@ const App = () => {
     }
 
     const url = 'https://text-sentiment-analyser-web-api.azurewebsites.net/Sentiment';
+    const postSqlUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/PostToSql';
+
     const body = JSON.stringify({ SentimentText: inputValue });
+
 
     try {
       const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: body,
+      });
+
+      if (!response.ok) {
+        throw new Error('Request failed');
+      }
+
+      try {
+        data = await response.json();
+      } catch (error) {
+        console.error('Error parsing JSON response:', error);
+        return;
+      }
+
+      console.log(data);
+
+      handleMessageSubmit(inputValue);
+      setInputValue('');
+    } catch (error) {
+      console.error('Error:', error);
+    }
+
+    try {
+      const response = await fetch(postSqlUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
