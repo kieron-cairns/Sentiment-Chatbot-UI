@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ChatMessages = ({ messages }) => {
+const ChatMessages = ({ inputMessage, messages }) => {
   return (
     <div className="chatbot-messages">
       {messages.map((message, index) => (
@@ -13,8 +13,11 @@ const ChatMessages = ({ messages }) => {
           }}
         >
           {message.queryText}
+          <br></br>
+          {message.queryResult}
         </div>
       ))}
+      
     </div>
   );
 };
