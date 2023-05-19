@@ -56,7 +56,7 @@
 }
 
 .chat-window {
-  padding-top: 5vh;
+  /* padding-top: 5vh; */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -71,6 +71,7 @@
 }
 
 .chatbot-messages {
+  padding-top: 5vh;
   flex-grow: 1;
   width: 100%;
   background-color: #454654;
