@@ -48,7 +48,7 @@
 
 .side-menu {
   width: 30vh;
-  background-color: #1F2123;
+  background-color:#454654;
   padding: 0px;
   height: 100vh; /* Set the height to 100vh */
   overflow-y: hidden; /* Disable scrolling within SideMenu */
@@ -62,7 +62,7 @@
   justify-content: flex-end;
   flex-grow: 1; /* Take up remaining space */
   overflow-x: hidden;
-  background-color: #454654; /* Default background color */
+  background-color:#1F2123; /* Default background color */
   width: 100vh;
 }
 
@@ -70,11 +70,23 @@
   background-color: #444653; /* Background color for bot response */
 }
 
+.loadedHistoryChat {
+  background-color: #1F2123;
+}
+
+.history-user-query {
+  background-color: #191919;
+}
+
+.history-bot-response {
+  
+}
+
 .chatbot-messages {
   padding-top: 5vh;
   flex-grow: 1;
   width: 100%;
-  background-color: #454654;
+  background-color: #1F2123;
   overflow-y: auto;
   color: white;
   font-size: 20px;
@@ -85,7 +97,7 @@
   align-items: center;
   justify-content: center;
   padding: 10px;
-  background-color: #454654;
+  background-color: #1F2123;
 }
 
 .chatbot-form input[type="text"] {
