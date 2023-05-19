@@ -56,6 +56,7 @@
 }
 
 .chat-window {
+  padding-top: 5vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -71,6 +72,7 @@
 
 .chatbot-messages {
   flex-grow: 1;
+  width: 100%;
   background-color: #454654;
   overflow-y: auto;
   color: white;
