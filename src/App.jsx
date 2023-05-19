@@ -1,13 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SideMenu from './Components/SideMenu';
 import ChatMessages from './Components/ChatMessages';
+import axios from 'axios';
 // import './ChatBot.css'; // Import the CSS file
 import './App.css'
 
 const App = () => {
   const [messages, setMessages] = useState([]);
+  const [messageHistory, setMessageHistory] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [dataCall, setData] = useState(null);
+  const [queryTextArray, setQueryTextArray] = useState([]);
+
   let data; // Declare data at a higher scope
+
+
+  const getMessageHistory = async () => {
+    try {
+      const response = await fetch('https://text-sentiment-analyser-web-api.azurewebsites.net/GetQueriesByIp');
+      const jsonData = await response.json();
+      setMessageHistory(jsonData);
+      // Extract queryText objects and add them to the array
+      const extractedQueryTextArray = jsonData.map(item => item.queryText);
+      setQueryTextArray(extractedQueryTextArray);
+      setMessages(extractedQueryTextArray)
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  useEffect(() => {
+    
+    getMessageHistory();
+  }, []);
+
+  useEffect(() => {
+    console.log(messageHistory);
+  }, [queryTextArray]);
 
   const handleMessageSubmit = (messageContent) => {
     const newMessage = {
@@ -15,16 +44,16 @@ const App = () => {
       sender: 'user',
     };
 
-    setMessages([...messages, newMessage]);
+    setMessages([...messageHistory, newMessage]);
 
     // Simulate bot response (replace with your own logic)
     setTimeout(() => {
       const botResponse = {
-        content: `Sentiment of previous text query: ${data.result}`,
+        content: `Sentiment of previous text query: ${data}`,
         sender: 'bot',
       };
 
-      setMessages([...messages, newMessage, botResponse]);
+      setMessages([...messageHistory, newMessage, botResponse]);
     }, 500);
   };
 
@@ -93,6 +122,7 @@ const App = () => {
 
       handleMessageSubmit(inputValue);
       setInputValue('');
+      getMessageHistory()
     } catch (error) {
       console.error('Error:', error);
     }
@@ -102,7 +132,7 @@ const App = () => {
     <div className='chatbot-container'>
       <SideMenu messages={messages} />
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <ChatMessages messages={messages} />
+        <ChatMessages messages={messageHistory} />
         <form className="chatbot-form" onSubmit={handleSubmit}>
           <input
             type="text"
