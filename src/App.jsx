@@ -11,6 +11,7 @@ const App = () => {
   const [inputValue, setInputValue] = useState('');
   const [dataCall, setData] = useState(null);
   const [queryTextArray, setQueryTextArray] = useState([]);
+  const [appRefreshed, setAppRefreshed] = useState(false);
 
   let data; // Declare data at a higher scope
 
@@ -24,6 +25,7 @@ const App = () => {
       const extractedQueryTextArray = jsonData.map(item => item.queryText);
       setQueryTextArray(extractedQueryTextArray);
       setMessages(extractedQueryTextArray)
+      setAppRefreshed(true)
     } catch (error) {
       console.error('Error:', error);
     }
@@ -44,17 +46,35 @@ const App = () => {
       sender: 'user',
     };
 
-    setMessages([...messageHistory, newMessage]);
+    if(!appRefreshed)
+    {
+      setMessages([...messageHistory, newMessage]);
 
-    // Simulate bot response (replace with your own logic)
-    setTimeout(() => {
-      const botResponse = {
-        content: `Sentiment of previous text query: ${data}`,
-        sender: 'bot',
-      };
+      // Simulate bot response (replace with your own logic)
+      setTimeout(() => {
+        const botResponse = {
+          content: `Sentiment of previous text query: ${data}`,
+          sender: 'bot',
+        };
 
-      setMessages([...messageHistory, newMessage, botResponse]);
-    }, 500);
+        setMessages([...messageHistory, newMessage, botResponse]);
+      }, 500);
+    }
+    else
+    {
+      setMessages([...messages, newMessage]);
+
+      // Simulate bot response (replace with your own logic)
+      setTimeout(() => {
+        const botResponse = {
+          content: `Sentiment of previous text query: ${data.result}`,
+          sender: 'bot',
+        };
+
+        setMessages([...messages, newMessage, botResponse]);
+      }, 500);
+    }
+
   };
 
   const handleSubmit = async (e) => {
@@ -122,7 +142,6 @@ const App = () => {
 
       handleMessageSubmit(inputValue);
       setInputValue('');
-      getMessageHistory()
     } catch (error) {
       console.error('Error:', error);
     }
@@ -132,7 +151,7 @@ const App = () => {
     <div className='chatbot-container'>
       <SideMenu messages={messages} />
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <ChatMessages messages={messageHistory} />
+        <ChatMessages messages={messageHistory} inputMessage={messages} />
         <form className="chatbot-form" onSubmit={handleSubmit}>
           <input
             type="text"
