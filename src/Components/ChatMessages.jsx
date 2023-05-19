@@ -8,13 +8,14 @@ const ChatMessages = ({ inputMessage, messages }) => {
           key={message.id}
           className={`chat-message ${message.sender === 'bot' ? 'bot-response' : ''}`}
           style={{
+            paddingBottom: '25px',
             backgroundColor: message.sender === 'bot' ? '#444653' : '#454654',
             textAlign: 'center' // Center the text
           }}
         >
           {message.queryText}
           <br></br>
-          {message.queryResult}
+          {'Sentiment of previous text query: ' + message.queryResult}
         </div>
       ))}
 
@@ -23,6 +24,7 @@ const ChatMessages = ({ inputMessage, messages }) => {
           key={index}
           className={`chat-message ${message.sender === 'bot' ? 'bot-response' : ''}`}
           style={{
+            paddingBottom: message.sender === 'bot' ? '25px' : '0px',
             backgroundColor: message.sender === 'bot' ? '#444653' : '#454654',
             textAlign: 'center' // Center the text
           }}

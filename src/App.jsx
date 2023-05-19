@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SideMenu from './Components/SideMenu';
 import ChatMessages from './Components/ChatMessages';
-import axios from 'axios';
 // import './ChatBot.css'; // Import the CSS file
 import './App.css'
 
@@ -9,7 +8,6 @@ const App = () => {
   const [messages, setMessages] = useState([]);
   const [messageHistory, setMessageHistory] = useState([]);
   const [inputValue, setInputValue] = useState('');
-  const [dataCall, setData] = useState(null);
   const [queryTextArray, setQueryTextArray] = useState([]);
   const [appRefreshed, setAppRefreshed] = useState(false);
 
@@ -37,6 +35,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+
     console.log(messageHistory);
   }, [queryTextArray]);
 
@@ -110,8 +109,7 @@ const App = () => {
         return;
       }
 
-      console.log(data);
-
+     
       handleMessageSubmit(inputValue);
       setInputValue('');
     } catch (error) {
