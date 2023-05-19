@@ -76,6 +76,7 @@
 
 .history-user-query {
   background-color: #313133;
+  height: 5vh;
 }
 
 .history-bot-response {
@@ -86,7 +87,7 @@
   padding-top: 5vh;
   flex-grow: 1;
   width: 100%;
-  background-color: #313133;
+  background-color: #272729;
   overflow-y: auto;
   color: white;
   font-size: 20px;

@@ -10,6 +10,7 @@ const ChatMessages = ({ inputMessage, messages }) => {
           style={{
             paddingBottom: '25px',
             backgroundColor: message.sender === 'bot' ? '#444653' : ' #272729',
+            // paddingTop: message.sender === 'bot' ? '25px' : '0px',
             textAlign: 'center' // Center the text
           }}
         >
@@ -26,7 +27,7 @@ const ChatMessages = ({ inputMessage, messages }) => {
           className={`chat-message ${message.sender === 'bot' ? 'bot-response' : ''}`}
           style={{
             paddingBottom: message.sender === 'bot' ? '25px' : '0px',
-            backgroundColor: message.sender === 'bot' ? '#864879' : '#864879',
+            backgroundColor: message.sender === 'bot' ? '#272729' : '#313133',
             textAlign: 'center' // Center the text
           }}
         >
