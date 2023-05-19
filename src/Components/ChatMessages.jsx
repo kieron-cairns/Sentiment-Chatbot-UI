@@ -9,7 +9,7 @@ const ChatMessages = ({ inputMessage, messages }) => {
           className={`chat-message ${message.sender === 'bot' ? 'bot-response' : ''}`}
           style={{
             paddingBottom: '25px',
-            backgroundColor: message.sender === 'bot' ? '#1F2123' : ' #1F2123',
+            backgroundColor: message.sender === 'bot' ? '#444653' : ' #272729',
             textAlign: 'center' // Center the text
           }}
         >
@@ -26,7 +26,7 @@ const ChatMessages = ({ inputMessage, messages }) => {
           className={`chat-message ${message.sender === 'bot' ? 'bot-response' : ''}`}
           style={{
             paddingBottom: message.sender === 'bot' ? '25px' : '0px',
-            backgroundColor: message.sender === 'bot' ? '#202020' : '#191919',
+            backgroundColor: message.sender === 'bot' ? '#864879' : '#864879',
             textAlign: 'center' // Center the text
           }}
         >
