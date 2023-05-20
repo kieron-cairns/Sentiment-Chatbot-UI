@@ -68,7 +68,9 @@ const App = () => {
       setTimeout(() => {
         const botResponse = {
           // queryText: `Sentiment of previous text query: ${data}`,
-          queryText: 'Sentiment of previous text query: hard coded positive',
+          // queryText: 'Sentiment of previous text query: hard coded positive',
+          // queryResult: 'Testing for chips',
+          queryResult: `Sentiment of previous text query: ${data.result}`,
 
           sender: 'bot',
         };

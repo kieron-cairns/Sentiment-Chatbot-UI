@@ -17,7 +17,12 @@ const ChatMessages = ({ inputMessage, messages }) => {
           <div className='history-user-query'>
           {message.queryText}
           </div>
-          {'Sentiment of previous text query: ' + message.queryResult}
+          
+         {message.queryResult !== null ? (
+          <div>
+          {message.queryResult}
+          </div>
+         ) : null}
         </div>
       ))}
 
