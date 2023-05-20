@@ -23,7 +23,7 @@ const App = () => {
   
       setMessageHistory(updatedMessageHistory);
 
-      setAppRefreshed(true)
+      // setAppRefreshed(true)
     } catch (error) {
       console.error('Error:', error);
     }

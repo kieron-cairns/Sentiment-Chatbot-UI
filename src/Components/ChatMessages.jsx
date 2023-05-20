@@ -25,17 +25,16 @@ const ChatMessages = ({ inputMessage, messages }) => {
           </div>
           {message.queryResult !== null ? (
             <div className="history-bot-response">
-              {/* {message.queryResult} */}
-
-              <TypeAnimation sequence={[
-            ` ${message.queryResult} `
-                ]}
-                wrapper="span"
-                cursor={true}
-                repeat={0}
-                style={{ fontSize: '1.25em', display: 'inline-block' }}
-              />
-              </div>
+              {typeof message.queryResult === 'string' && (
+                <TypeAnimation
+                  sequence={[message.queryResult]}
+                  wrapper="span"
+                  cursor={0}
+                  repeat={0}
+                  style={{ fontSize: '1em', display: 'inline-block' }}
+                />
+              )}
+            </div>
           ) : null}
         </div>
       ))}
