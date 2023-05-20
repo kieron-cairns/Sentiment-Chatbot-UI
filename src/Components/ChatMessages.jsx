@@ -14,10 +14,13 @@ const ChatMessages = ({ inputMessage, messages }) => {
             textAlign: 'center' // Center the text
           }}
         >
-          <div className='history-user-query'>
-          {message.queryText}
+          <div>
+          {message.queryText != null ? (
+            <div>
+              {message.queryText}
           </div>
-          
+          ) : null}
+          </div>
          {message.queryResult !== null ? (
           <div>
           {message.queryResult}
