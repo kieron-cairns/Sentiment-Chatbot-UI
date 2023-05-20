@@ -24,7 +24,7 @@ const App = () => {
       setQueryTextArray(extractedQueryTextArray);
       setMessages(extractedQueryTextArray)
 
-      setMessages([...messageHistory, extractedQueryTextArray])
+      // setMessages([...messageHistory, extractedQueryTextArray])
 
       setAppRefreshed(true)
     } catch (error) {
@@ -43,39 +43,52 @@ const App = () => {
   }, [queryTextArray]);
 
   const handleMessageSubmit = (messageContent) => {
+    // const newMessage = {
+    //   content: messageContent,
+    //   sender: 'user',
+    // };
+    console.log('*** handle message submit hit ***')
+
     const newMessage = {
-      content: messageContent,
-      sender: 'user',
-    };
+      id: 'e8f0ca78-c124-4420-a8fa-456238ce0fa2',
+      ipAddress: '86.129.156.212',
+      date: '2023-05-20T09:14:29.635599',
+      queryText: 'This is a good hard-coded message',
+      queryResult: 'Positive'
+    }
 
-    if(!appRefreshed)
-    {
-      setMessages([...messageHistory, newMessage]);
+    console.log(messageHistory)
+
+    console.log('hard coded value added?')
+
+    // if(!appRefreshed)
+    // {
+      setMessageHistory([...messageHistory, newMessage]);
 
       // Simulate bot response (replace with your own logic)
       setTimeout(() => {
-        const botResponse = {
-          content: `Sentiment of previous text query: ${data}`,
-          sender: 'bot',
-        };
+        // const botResponse = {
+        //   content: `Sentiment of previous text query: ${data}`,
+        //   sender: 'bot',
+        // };
 
-        setMessages([...messageHistory, newMessage, botResponse]);
+        // setMessages([...messageHistory, newMessage, botResponse]);
       }, 500);
-    }
-    else
-    {
-      setMessages([...messages, newMessage]);
+    // }
+    // else
+    // {
+    //   setMessages([...messages, newMessage]);
 
-      // Simulate bot response (replace with your own logic)
-      setTimeout(() => {
-        const botResponse = {
-          content: `Sentiment of previous text query: ${data.result}`,
-          sender: 'bot',
-        };
+    //   // Simulate bot response (replace with your own logic)
+    //   setTimeout(() => {
+    //     const botResponse = {
+    //       content: `Sentiment of previous text query: ${data.result}`,
+    //       sender: 'bot',
+    //     };
 
-        setMessages([...messages, newMessage, botResponse]);
-      }, 500);
-    }
+    //     setMessages([...messages, newMessage, botResponse]);
+    //   }, 500);
+    // }
 
   };
 
@@ -143,7 +156,7 @@ const App = () => {
       console.log(messageHistory);
 
       handleMessageSubmit(inputValue);
-      getMessageHistory()
+      // getMessageHistory()
       setInputValue('');
       console.log(messageHistory);
 

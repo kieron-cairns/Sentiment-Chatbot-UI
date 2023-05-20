@@ -6,7 +6,7 @@ const ChatMessages = ({ inputMessage, messages }) => {
       {messages.map((message, index) => (
         <div className='loadedHistoryChat'
           key={message.id}
-          className={`chat-message ${message.sender === 'bot' ? 'bot-response' : ''}`}
+          // className={`chat-message ${message.sender === 'bot' ? 'bot-response' : ''}`}
           style={{
             paddingBottom: '25px',
             backgroundColor: message.sender === 'bot' ? '#444653' : ' #272729',
