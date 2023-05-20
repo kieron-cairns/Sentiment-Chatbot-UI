@@ -49,11 +49,9 @@ const App = () => {
     console.log('*** handle message submit hit ***')
 
     const newMessage = {
-      id: 'e8f0ca78-c124-4420-a8fa-456238ce0fa2',
-      ipAddress: '86.129.156.212',
-      date: '2023-05-20T09:14:29.635599',
-      queryText: 'This is a good hard-coded message',
-      // queryResult: 'Positive'
+    
+      queryText: messageContent,
+      sender: 'user'
     }
 
     console.log(messageHistory)
