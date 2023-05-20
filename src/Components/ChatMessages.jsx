@@ -9,7 +9,7 @@ const ChatMessages = ({ inputMessage, messages }) => {
           // className={`chat-message ${message.sender === 'bot' ? 'bot-response' : ''}`}
           style={{
             paddingBottom: '25px',
-            backgroundColor: message.sender === 'bot' ? '#444653' : ' #272729',
+            backgroundColor: message.sender === 'bot' ? '#313133' : ' #272729',
             // paddingTop: message.sender === 'bot' ? '25px' : '0px',
             textAlign: 'center' // Center the text
           }}
@@ -22,7 +22,7 @@ const ChatMessages = ({ inputMessage, messages }) => {
           ) : null}
           </div>
          {message.queryResult !== null ? (
-          <div>
+          <div className='history-user-query'>
           {message.queryResult}
           </div>
          ) : null}
