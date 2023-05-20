@@ -19,7 +19,7 @@ const App = () => {
       const response = await fetch('https://text-sentiment-analyser-web-api.azurewebsites.net/GetQueriesByIp');
       const jsonData = await response.json();
   
-      const extractedQueryTextArray = jsonData.map(item => ({ queryText: item.queryText }));
+      const extractedQueryTextArray = jsonData.map(item => ({ queryText: item.queryText, queryResult: item.queryResult }));
   
       const updatedMessageHistory = [...messageHistory, ...extractedQueryTextArray];
   
