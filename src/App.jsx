@@ -40,10 +40,7 @@ const App = () => {
   }, [messageHistory]);
 
   const handleMessageSubmit = (messageContent) => {
-    // const newMessage = {
-    //   content: messageContent,
-    //   sender: 'user',
-    // };
+
     console.log('*** handle message submit hit ***')
 
     const newMessage = {
