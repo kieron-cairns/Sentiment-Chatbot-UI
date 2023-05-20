@@ -19,7 +19,7 @@ const App = () => {
       const response = await fetch('https://text-sentiment-analyser-web-api.azurewebsites.net/GetQueriesByIp');
       const jsonData = await response.json();
   
-      const extractedQueryTextArray = jsonData.map(item => ({ queryText: item.queryText, queryResult: item.queryResult }));
+      const extractedQueryTextArray = jsonData.map(item => ({ queryText: item.queryText, queryResult: 'Sentiment result is ' + item.queryResult.toLowerCase() }));
   
       const updatedMessageHistory = [...messageHistory, ...extractedQueryTextArray];
   
@@ -68,7 +68,7 @@ const App = () => {
           // queryText: `Sentiment of previous text query: ${data}`,
           // queryText: 'Sentiment of previous text query: hard coded positive',
           // queryResult: 'Testing for chips',
-          queryResult: `${data.result}`,
+          queryResult: ` Sentiment result is ${data.result.toLowerCase()}`,
 
           sender: 'bot',
         };

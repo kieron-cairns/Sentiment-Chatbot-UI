@@ -13,8 +13,8 @@ const ChatMessages = ({ inputMessage, messages }) => {
         >
           <div>
           {message.queryText !== null && message.queryText !== '' && (
-  <div className="history-user-query">{message.queryText}</div>
-)}
+          <div className="history-user-query">{message.queryText}</div>
+        )}
 
           </div>
          {message.queryResult !== null ? (
