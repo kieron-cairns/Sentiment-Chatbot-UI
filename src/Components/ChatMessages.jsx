@@ -25,7 +25,7 @@ const ChatMessages = ({ inputMessage, messages }) => {
           </div>
           {message.queryResult !== null ? (
             <div className="history-bot-response">
-              {typeof message.queryResult === 'string' && (
+              {typeof message.queryResult === 'string' && message.sender === 'bot' && (
                 <TypeAnimation
                   sequence={[message.queryResult]}
                   wrapper="span"
