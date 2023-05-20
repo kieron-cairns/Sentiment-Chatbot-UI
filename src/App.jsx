@@ -8,10 +8,8 @@ const App = () => {
   const [messages, setMessages] = useState([]);
   const [messageHistory, setMessageHistory] = useState([]);
   const [inputValue, setInputValue] = useState('');
-  const [queryTextArray, setQueryTextArray] = useState([]);
-  const [appRefreshed, setAppRefreshed] = useState(false);
 
-  let data; // Declare data at a higher scope
+  let data; 
 
 
   const getMessageHistory = async () => {
@@ -58,38 +56,17 @@ const App = () => {
 
     console.log('hard coded value added?')
 
-    // if(!appRefreshed)
-    // {
       setMessageHistory([...messageHistory, newMessage]);
 
       // Simulate bot response (replace with your own logic)
       setTimeout(() => {
         const botResponse = {
-          // queryText: `Sentiment of previous text query: ${data}`,
-          // queryText: 'Sentiment of previous text query: hard coded positive',
-          // queryResult: 'Testing for chips',
+         
           queryResult: ` Sentiment result is ${data.result.toLowerCase()}`,
-
           sender: 'bot',
         };
         setMessageHistory([...messageHistory, newMessage, botResponse]);
       }, 500);
-    // }
-    // else
-    // {
-    //   setMessages([...messages, newMessage]);
-
-    //   // Simulate bot response (replace with your own logic)
-    //   setTimeout(() => {
-    //     const botResponse = {
-    //       content: `Sentiment of previous text query: ${data.result}`,
-    //       sender: 'bot',
-    //     };
-
-    //     setMessages([...messages, newMessage, botResponse]);
-    //   }, 500);
-    // }
-
   };
 
   const handleSubmit = async (e) => {
