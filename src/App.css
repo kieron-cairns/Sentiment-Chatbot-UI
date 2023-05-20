@@ -102,8 +102,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 1vh;
   background-color: #272729;
+  width: 90%;
 }
 
 .chatbot-form input[type="text"] {
