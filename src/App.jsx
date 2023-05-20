@@ -68,7 +68,7 @@ const App = () => {
           // queryText: `Sentiment of previous text query: ${data}`,
           // queryText: 'Sentiment of previous text query: hard coded positive',
           // queryResult: 'Testing for chips',
-          queryResult: `Sentiment of previous text query: ${data.result}`,
+          queryResult: `${data.result}`,
 
           sender: 'bot',
         };

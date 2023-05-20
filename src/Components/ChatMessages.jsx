@@ -8,22 +8,21 @@ const ChatMessages = ({ inputMessage, messages }) => {
           key={message.id}
           // className={`chat-message ${message.sender === 'bot' ? 'bot-response' : ''}`}
           style={{
-            paddingBottom: '25px',
-            backgroundColor: message.sender === 'bot' ? '#313133' : ' #272729',
+            // backgroundColor: message.sender === 'bot' ? '#313133' : ' #272729',
             // paddingTop: message.sender === 'bot' ? '25px' : '0px',
             textAlign: 'center' // Center the text
           }}
         >
           <div>
           {message.queryText != null ? (
-            <div>
+            <div className='history-user-query'>
               {message.queryText}
           </div>
           ) : null}
           </div>
          {message.queryResult !== null ? (
-          <div className='history-user-query'>
-          {message.queryResult}
+          <div className='history-bot-response'>
+          {'Sentiment of previous query: ' +  message.queryResult}
           </div>
          ) : null}
         </div>

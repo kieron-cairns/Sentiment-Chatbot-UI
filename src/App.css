@@ -48,7 +48,7 @@
 
 .side-menu {
   width: 30vh;
-  background-color: #343540;
+  background-color: #1E2125;
   padding: 0px;
   height: 100vh; /* Set the height to 100vh */
   overflow-y: hidden; /* Disable scrolling within SideMenu */
@@ -71,16 +71,18 @@
 }
 
 .loadedHistoryChat {
-  background-color: #3F3351;
+  /* background-color:#272729; */
 }
 
 .history-user-query {
   background-color: #313133;
+  height: 3vh;
   /* height: 5vh; */
 }
 
 .history-bot-response {
-  
+  background-color: #272729;
+  height: 3vh;
 }
 
 .chatbot-messages {
