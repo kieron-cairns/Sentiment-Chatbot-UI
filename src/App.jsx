@@ -53,7 +53,7 @@ const App = () => {
       ipAddress: '86.129.156.212',
       date: '2023-05-20T09:14:29.635599',
       queryText: 'This is a good hard-coded message',
-      queryResult: 'Positive'
+      // queryResult: 'Positive'
     }
 
     console.log(messageHistory)
@@ -66,12 +66,13 @@ const App = () => {
 
       // Simulate bot response (replace with your own logic)
       setTimeout(() => {
-        // const botResponse = {
-        //   content: `Sentiment of previous text query: ${data}`,
-        //   sender: 'bot',
-        // };
+        const botResponse = {
+          // queryText: `Sentiment of previous text query: ${data}`,
+          queryText: 'Sentiment of previous text query: hard coded positive',
 
-        // setMessages([...messageHistory, newMessage, botResponse]);
+          sender: 'bot',
+        };
+        setMessageHistory([...messageHistory, newMessage, botResponse]);
       }, 500);
     // }
     // else
