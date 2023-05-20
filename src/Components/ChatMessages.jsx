@@ -21,7 +21,7 @@ const ChatMessages = ({ inputMessage, messages }) => {
         </div>
       ))}
 
-      {inputMessage.map((message, index) => (
+      {/* {inputMessage.map((message, index) => (
         <div
           key={index}
           className={`chat-message ${message.sender === 'bot' ? 'bot-response' : ''}`}
@@ -33,8 +33,7 @@ const ChatMessages = ({ inputMessage, messages }) => {
         >
           {message.content}
         </div>
-      ))}
-      
+      ))} */}
     </div>
   );
 };

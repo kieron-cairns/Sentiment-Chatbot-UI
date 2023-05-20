@@ -139,6 +139,7 @@ const App = () => {
       console.log(data);
 
       handleMessageSubmit(inputValue);
+      getMessageHistory()
       setInputValue('');
     } catch (error) {
       console.error('Error:', error);
