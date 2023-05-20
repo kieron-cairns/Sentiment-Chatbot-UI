@@ -74,19 +74,22 @@
   /* background-color:#272729; */
 }
 
-.history-user-query {
+.history-user-query:not(:empty) {
   background-color: #313133;
-  height: 3vh;
-  /* height: 5vh; */
+  margin: 5vh 5vh 5vh 5vh;
+  padding: 5vh 0;
+  border-radius: 15px;
 }
+
 
 .history-bot-response {
   background-color: #272729;
-  height: 3vh;
+  /* height: 3vh; */
+
 }
 
 .chatbot-messages {
-  padding-top: 5vh;
+  /* padding-top: 5vh; */
   flex-grow: 1;
   width: 100%;
   background-color: #272729;
