@@ -18,13 +18,12 @@ const App = () => {
     try {
       const response = await fetch('https://text-sentiment-analyser-web-api.azurewebsites.net/GetQueriesByIp');
       const jsonData = await response.json();
-      setMessageHistory(jsonData);
-      // Extract queryText objects and add them to the array
-      const extractedQueryTextArray = jsonData.map(item => item.queryText);
-      setQueryTextArray(extractedQueryTextArray);
-      setMessages(extractedQueryTextArray)
-
-      // setMessages([...messageHistory, extractedQueryTextArray])
+  
+      const extractedQueryTextArray = jsonData.map(item => ({ queryText: item.queryText }));
+  
+      const updatedMessageHistory = [...messageHistory, ...extractedQueryTextArray];
+  
+      setMessageHistory(updatedMessageHistory);
 
       setAppRefreshed(true)
     } catch (error) {
@@ -39,8 +38,8 @@ const App = () => {
 
   useEffect(() => {
 
-    // console.log(messageHistory);
-  }, [queryTextArray]);
+    console.log(messageHistory);
+  }, [messageHistory]);
 
   const handleMessageSubmit = (messageContent) => {
     // const newMessage = {
