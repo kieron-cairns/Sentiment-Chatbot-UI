@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { TypeAnimation } from 'react-type-animation';
 
 const ChatMessages = ({ inputMessage, messages }) => {
   const messagesEndRef = useRef(null);
@@ -13,6 +14,8 @@ const ChatMessages = ({ inputMessage, messages }) => {
 
   return (
     <div className="chatbot-messages">
+     
+      
       {messages.map((message, index) => (
         <div className="loadedHistoryChat" key={index} style={{ textAlign: 'center' }}>
           <div>
@@ -21,7 +24,18 @@ const ChatMessages = ({ inputMessage, messages }) => {
             )}
           </div>
           {message.queryResult !== null ? (
-            <div className="history-bot-response">{message.queryResult}</div>
+            <div className="history-bot-response">
+              {/* {message.queryResult} */}
+
+              <TypeAnimation sequence={[
+            ` ${message.queryResult} `
+                ]}
+                wrapper="span"
+                cursor={true}
+                repeat={0}
+                style={{ fontSize: '1.25em', display: 'inline-block' }}
+              />
+              </div>
           ) : null}
         </div>
       ))}
