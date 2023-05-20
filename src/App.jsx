@@ -23,6 +23,9 @@ const App = () => {
       const extractedQueryTextArray = jsonData.map(item => item.queryText);
       setQueryTextArray(extractedQueryTextArray);
       setMessages(extractedQueryTextArray)
+
+      setMessages([...messageHistory, extractedQueryTextArray])
+
       setAppRefreshed(true)
     } catch (error) {
       console.error('Error:', error);
@@ -36,7 +39,7 @@ const App = () => {
 
   useEffect(() => {
 
-    console.log(messageHistory);
+    // console.log(messageHistory);
   }, [queryTextArray]);
 
   const handleMessageSubmit = (messageContent) => {
@@ -136,11 +139,14 @@ const App = () => {
         return;
       }
 
-      console.log(data);
+      console.log('Message History: ')
+      console.log(messageHistory);
 
       handleMessageSubmit(inputValue);
       getMessageHistory()
       setInputValue('');
+      console.log(messageHistory);
+
     } catch (error) {
       console.error('Error:', error);
     }
