@@ -3,6 +3,7 @@ import SideMenu from './Components/SideMenu';
 import ChatMessages from './Components/ChatMessages';
 // import './ChatBot.css'; // Import the CSS file
 import './App.css'
+import SignInModal from './Components/SignInModal';
 
 const App = () => {
   const [messages, setMessages] = useState([]);
@@ -177,6 +178,7 @@ const App = () => {
 
   return (
     <div className="chatbot-container">
+      <SignInModal />
     {windowWidth >= 900 && <SideMenu messages={messageHistory} handleClick={deleteAllItems} />}
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ChatMessages messages={messageHistory} inputMessage={messages} />
