@@ -1,11 +1,12 @@
 import React from 'react';
 
-const SideMenu = ({ messages }) => {
+const SideMenu = ({messages, handleClick}) => {
+  
   return (
     <div className="side-menu">
       <h2>Simple Sentiment Analysis</h2>
-      <button>Delete History</button>
-      <ul className="chat-history">
+      <button  onClick={handleClick} >Delete History</button>
+      {/* <ul className="chat-history">
         {messages.map((message, index) => (
           <li
             key={index}
@@ -14,7 +15,7 @@ const SideMenu = ({ messages }) => {
             {message.content}
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };

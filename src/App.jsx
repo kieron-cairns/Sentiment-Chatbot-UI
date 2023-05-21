@@ -33,6 +33,33 @@ const App = () => {
     }
   };
 
+  function deleteAllItems() {
+    console.log('Button Pressed')
+    fetch('https://text-sentiment-analyser-web-api.azurewebsites.net/DeleteAllByIp', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        // Additional headers if required
+      },
+      // Request body if required
+    })
+      .then(response => {
+        // Handle the response
+        if (response.ok) {
+    
+          // Successful DELETE request
+          // Perform any desired actions
+          setMessageHistory([])
+        } else {
+          // Handle errors
+          // You can check response.status and response.statusText for more details
+        }
+      })
+      .catch(error => {
+        // Handle network or other errors
+      });
+  }
+
   useEffect(() => {
      window.addEventListener('resize', handleResize);
 
@@ -150,7 +177,7 @@ const App = () => {
 
   return (
     <div className="chatbot-container">
-    {windowWidth >= 900 && <SideMenu messages={messages} />}
+    {windowWidth >= 900 && <SideMenu messages={messageHistory} handleClick={deleteAllItems} />}
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ChatMessages messages={messageHistory} inputMessage={messages} />
         <form className="chatbot-form" onSubmit={handleSubmit}>
