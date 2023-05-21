@@ -8,9 +8,13 @@ const App = () => {
   const [messages, setMessages] = useState([]);
   const [messageHistory, setMessageHistory] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   let data; 
 
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
 
   const getMessageHistory = async () => {
     try {
@@ -30,8 +34,13 @@ const App = () => {
   };
 
   useEffect(() => {
-    
-    getMessageHistory();
+     window.addEventListener('resize', handleResize);
+
+  return () => {
+    window.removeEventListener('resize', handleResize);
+    getMessageHistory()
+  };
+    // getMessageHistory();
   }, []);
 
   useEffect(() => {
@@ -140,8 +149,8 @@ const App = () => {
   };
 
   return (
-    <div className='chatbot-container'>
-      <SideMenu messages={messages} />
+    <div className="chatbot-container">
+    {windowWidth >= 900 && <SideMenu messages={messages} />}
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ChatMessages messages={messageHistory} inputMessage={messages} />
         <form className="chatbot-form" onSubmit={handleSubmit}>
@@ -151,7 +160,7 @@ const App = () => {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
           />
-          <button type="submit">Send</button>
+          <button className='chatbot-form-button' type="submit">Send</button>
         </form>
       </div>
     </div>
