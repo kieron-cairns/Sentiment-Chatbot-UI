@@ -174,4 +174,32 @@
   transform: translateX(-100%);
 }
 
+.login-modal-input {
+  width: 75%;
+  height: 4vh;
+  border-radius: 10px;
+}
+
+.login-modal-button {
+  background-color: #454654;
+  outline: 0.5px solid  #454654;
+  place-items: center;
+  width: 75%;
+  margin-top: 4vh;
+  color: white;
+  border-style: solid;
+  box-shadow: none;
+  border-radius: 15px;
+  height: 5vh;
+  margin-left: 2.5vh;
+  margin-right: 2vh;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.login-modal-form {
+  margin-top: 2vh;
+  margin-bottom: 4vh;
+}
+
 /* Rest of your custom styles */
