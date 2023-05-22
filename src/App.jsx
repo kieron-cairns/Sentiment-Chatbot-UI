@@ -157,15 +157,15 @@ const App = () => {
       const token = localStorage.getItem('token');
 
       // Set the authorization header
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-      const response = await axios.post(postSqlUrl, {
-        method: 'POST',
+      const response = await axios.post(postSqlUrl, body, {
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
-        body: body,
       });
+      
 
       if (!response.ok) {
         throw new Error('Request failed');

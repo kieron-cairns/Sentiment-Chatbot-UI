@@ -10,22 +10,27 @@ async function authenticateUser() {
   try {
 
     const headers = {
-      // 'Content-Type': 'application/json', // Example header
-      // 'Authorization': 'Bearer token123', // Example header
+
       'username' : 'TestUser101',
       'password' : 'suspiciousSalmon666*()'
       // Add more headers as needed
     };
 
-    const response = await axios.post('https://text-sentiment-analyser-web-api.azurewebsites.net/AuthenticateUser', {headers });
+    const response = await axios.post('https://text-sentiment-analyser-web-api.azurewebsites.net/AuthenticateUser', {}, {
+      headers: headers
+    });
+    
     const { token } = response.data;
-
+    
     // Store the token in local storage
-    localStorage.setItem('token', token);
-
+    localStorage.setItem('token', response.data);
+    console.log('***** token is *****');
+    console.log(response.data);
     // Decode the token to access its payload
-    const decodedToken = jwt_decode(token);
-    console.log(decodedToken);
+    // const decodedToken = jwt_decode(token);
+    // console.log('***** Decoded Token Is: *****');
+    // console.log(decodedToken);
+    
   } catch (error) {
     console.error('Authentication failed:', error);
   }
