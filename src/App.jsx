@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SideMenu from './Components/SideMenu';
 import ChatMessages from './Components/ChatMessages';
-// import './ChatBot.css'; // Import the CSS file
+import axios from 'axios';
 import './App.css'
 import SignInModal from './Components/SignInModal';
 
@@ -74,6 +74,15 @@ const App = () => {
   useEffect(() => {
 
     console.log(messageHistory);
+
+    console.log('****** JWT Token *****')
+    const token = localStorage.getItem('token');
+
+    // Set the authorization header
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+    console.log(token)
+
   }, [messageHistory]);
 
   const handleMessageSubmit = (messageContent) => {
@@ -144,7 +153,13 @@ const App = () => {
     }
 
     try {
-      const response = await fetch(postSqlUrl, {
+      // Get the token from local storage
+      const token = localStorage.getItem('token');
+
+      // Set the authorization header
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      const response = await axios.post(postSqlUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -155,6 +170,9 @@ const App = () => {
       if (!response.ok) {
         throw new Error('Request failed');
       }
+
+      console.log("************* response data ***************")
+      console.log(response.data)
 
       try {
         data = await response.json();

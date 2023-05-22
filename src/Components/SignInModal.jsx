@@ -1,5 +1,27 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
+
+
+
+
+async function authenticateUser() {
+  try {
+    const response = await axios.post('https://text-sentiment-analyser-web-api.azurewebsites.net/Sentiment/authenticate');
+    const { token } = response.data;
+
+    // Store the token in local storage
+    localStorage.setItem('token', token);
+
+    // Decode the token to access its payload
+    const decodedToken = jwt_decode(token);
+    console.log(decodedToken);
+  } catch (error) {
+    console.error('Authentication failed:', error);
+  }
+}
+
 
 const SignInModal = () => {
   const [modalIsOpen, setIsOpen] = React.useState(true);
@@ -50,7 +72,7 @@ const SignInModal = () => {
     <div>
     <input className='login-modal-input' placeholder='Password'></input>
     </div>
-    <button className='login-modal-button'>Login</button>
+    <button onClick={authenticateUser} className='login-modal-button'>Login</button>
 
   </Modal>
   );
