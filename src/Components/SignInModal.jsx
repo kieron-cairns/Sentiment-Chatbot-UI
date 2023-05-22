@@ -8,7 +8,16 @@ import jwt_decode from 'jwt-decode';
 
 async function authenticateUser() {
   try {
-    const response = await axios.post('https://text-sentiment-analyser-web-api.azurewebsites.net/Sentiment/authenticate');
+
+    const headers = {
+      // 'Content-Type': 'application/json', // Example header
+      // 'Authorization': 'Bearer token123', // Example header
+      'username' : 'TestUser101',
+      'password' : 'suspiciousSalmon666*()'
+      // Add more headers as needed
+    };
+
+    const response = await axios.post('https://text-sentiment-analyser-web-api.azurewebsites.net/AuthenticateUser', {headers });
     const { token } = response.data;
 
     // Store the token in local storage
