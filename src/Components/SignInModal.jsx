@@ -6,12 +6,13 @@ import jwt_decode from 'jwt-decode';
 
 
 
-async function authenticateUser() {
+async function authenticateUser(username, password) {
   try {
 
     const headers = {
 
-    
+      'username' : username,
+      'password' : password
       // Add more headers as needed
     };
 
