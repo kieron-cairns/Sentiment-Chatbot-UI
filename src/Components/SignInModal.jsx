@@ -11,8 +11,7 @@ async function authenticateUser() {
 
     const headers = {
 
-      'username' : 'TestUser101',
-      'password' : 'suspiciousSalmon666*()'
+    
       // Add more headers as needed
     };
 
