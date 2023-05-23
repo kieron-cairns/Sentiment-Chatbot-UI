@@ -4,6 +4,7 @@ import ChatMessages from './Components/ChatMessages';
 import axios from 'axios';
 import './App.css'
 import SignInModal from './Components/SignInModal';
+import { TypeAnimation } from 'react-type-animation';
 
 const App = () => {
   const [messages, setMessages] = useState([]);
@@ -11,8 +12,21 @@ const App = () => {
   const [inputValue, setInputValue] = useState('');
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [displayButton, setDisplayButton] = useState(false);
 
   let data; 
+
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDisplayButton(true);
+      console.log("*** Button Should Display ****")
+    }, 3000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
@@ -34,6 +48,14 @@ const App = () => {
       console.error('Error:', error);
     }
   };
+
+  function showBotLoginButton() {
+    return (
+      <div>
+        <button>Login</button>
+      </div>
+    )
+  }
 
   function deleteAllItems() {
     console.log('Button Pressed')
@@ -86,16 +108,7 @@ const App = () => {
 
   }, [messageHistory]);
 
-  const userNotLoggedInSubmit = () => {
-    setTimeout(() => {
-      const botResponse = {
-       
-        queryResult: 'You are currently not logged in, please login to continue. . .',
-        sender: 'bot',
-      };
-      setMessageHistory([...messageHistory, botResponse]);
-    }, 500);
-  }
+
 
   const handleMessageSubmit = (messageContent) => {
 
@@ -108,9 +121,27 @@ const App = () => {
       sender: 'user'
     }
 
+    const showBotLoginButton = (
+      <button>Login</button>
+    );
+  
     const botMessageContent = !isLoggedIn
-    ? 'You are currently not logged in. Please login to continue...'
-    : `Sentiment result is ${data.result.toLowerCase()}`;
+      ? (
+        <div>
+            <TypeAnimation
+                sequence={['You are currently not logged in. Please login to continue...']}
+                wrapper="span"
+                cursor={0}
+                repeat={0}
+                speed={80}
+                style={{ fontSize: '1em', display: 'inline-block' }}
+              />
+           <br></br>   
+          {showBotLoginButton}
+        </div>
+      )
+      : `Sentiment result is ${data.result.toLowerCase()}`;
+  
 
     console.log(messageHistory)
 
@@ -132,12 +163,7 @@ const App = () => {
   const handleSubmit = async (e) => {
 
 
-    // if(!isLoggedIn)
-    // {
-    //   userNotLoggedInSubmit()
-    // }
-    // else
-    // {
+   
       e.preventDefault();
 
       if (inputValue.trim() === '') {
@@ -184,7 +210,6 @@ const App = () => {
       } catch (error) {
         console.error('Error:', error);
       }
-    // }
   };
 
   return (

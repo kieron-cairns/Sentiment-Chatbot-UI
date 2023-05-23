@@ -37,7 +37,6 @@ const ChatMessages = ({ inputMessage, messages }) => {
             ) : (
               message.queryResult
             )}
-
             </div>
           ) : null}
         </div>
