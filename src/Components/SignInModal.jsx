@@ -3,9 +3,10 @@ import Modal from 'react-modal';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
-const SignInModal = (isLoggedIn, setIsLoggedIn) => {
+const SignInModal = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(true);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+    const { isLoggedIn, setIsLoggedIn } = props;
 
 
     const [username, setUsername] = useState('');
@@ -37,7 +38,7 @@ const SignInModal = (isLoggedIn, setIsLoggedIn) => {
         // const decodedToken = jwt_decode(token);
         // console.log('***** Decoded Token Is: *****');
         // console.log(decodedToken);
-        isLoggedIn = true
+        setIsLoggedIn(true)
       } catch (error) {
         console.error('Authentication failed:', error);
       }

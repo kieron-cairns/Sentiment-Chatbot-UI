@@ -128,39 +128,9 @@ const App = () => {
     if (inputValue.trim() === '') {
       return;
     }
-
-    const url = 'https://text-sentiment-analyser-web-api.azurewebsites.net/Sentiment';
     const postSqlUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/PostToSql';
 
     const body = JSON.stringify({ SentimentText: inputValue });
-
-
-    // try {
-    //   const response = await fetch(url, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: body,
-    //   });
-
-    //   if (!response.ok) {
-    //     throw new Error('Request failed');
-    //   }
-
-    //   try {
-    //     data = await response.json();
-    //   } catch (error) {
-    //     console.error('Error parsing JSON response:', error);
-    //     return;
-    //   }
-
-     
-    //   handleMessageSubmit(inputValue);
-    //   setInputValue('');
-    // } catch (error) {
-    //   console.error('Error:', error);
-    // }
 
     try {
       // Get the token from local storage
@@ -178,24 +148,13 @@ const App = () => {
 
       data = response.data
 
-      
-
-      // if (!response.ok) {
-      
-      //   console.log(response)
-      //   console.log(response.data)
-
-      //   throw new Error('Request failed');
-      // }
-
-     
-
-      // try {
-      //   data = await response.json();
-      // } catch (error) {
-      //   console.error('Error parsing JSON response:', error);
-      //   return;
-      // }
+      try {
+        data = await response.data
+      }
+      catch (error) {
+        console.error('Error parsing JSON response:', error);
+        return;
+      }
 
        console.log("************* response data ***************")
       console.log(response.data)
@@ -204,7 +163,6 @@ const App = () => {
       console.log(messageHistory);
 
       handleMessageSubmit(inputValue);
-      // getMessageHistory()
       setInputValue('');
       console.log(messageHistory);
 
