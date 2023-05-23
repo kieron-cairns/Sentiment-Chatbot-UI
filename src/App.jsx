@@ -38,7 +38,7 @@ const App = () => {
 
   const verifyBeaerToken = async () => {
     try {
-      const beaerUrl = ''
+      const beaerUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/VerifyBearer'
       const token = localStorage.getItem('token');
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
@@ -53,10 +53,14 @@ const App = () => {
       const beaerData = await response.data
 
       console.log(beaerData)
+      setIsLoggedIn(true)
+      return true
 
     } catch(error)
     {
       console.log(error)
+      setIsLoggedIn(false)
+      return false
     }
   }
 
@@ -134,6 +138,7 @@ const App = () => {
 
   return () => {
     window.removeEventListener('resize', handleResize);
+    verifyBeaerToken()
     getMessageHistory()
   };
     // getMessageHistory();
@@ -148,7 +153,7 @@ const App = () => {
     // var token = null
     // Set the authorization header
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    setIsLoggedIn(token !== undefined && token !== null);
+    //setIsLoggedIn(token !== undefined || token !== null || verifyBeaerToken !== false);
 
     console.log(token)
 
