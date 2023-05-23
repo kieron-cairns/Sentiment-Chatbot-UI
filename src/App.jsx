@@ -91,6 +91,10 @@ const App = () => {
   useEffect(() => {
      window.addEventListener('resize', handleResize);
 
+     //Validify beaer token
+
+
+
   return () => {
     window.removeEventListener('resize', handleResize);
     getMessageHistory()
@@ -107,6 +111,7 @@ const App = () => {
 
     // Set the authorization header
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    setIsLoggedIn(token !== undefined && token !== null);
 
     console.log(token)
 
