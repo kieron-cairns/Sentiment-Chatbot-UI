@@ -37,6 +37,7 @@ const App = () => {
   };
 
   const verifyBeaerToken = async () => {
+    console.log('***** TOKEN BEING VERIFIED ****')
     try {
       const beaerUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/VerifyBearer'
       const token = localStorage.getItem('token');
@@ -53,11 +54,15 @@ const App = () => {
       const beaerData = await response.data
 
       console.log(beaerData)
+      console.log('*** Beaer is legit ****')
       setIsLoggedIn(true)
+      getMessageHistory()
       return true
 
     } catch(error)
     {
+      console.log('*** Beaer is not legit ****')
+
       console.log(error)
       setIsLoggedIn(false)
       return false
@@ -66,7 +71,7 @@ const App = () => {
 
   const getMessageHistory = async () => {
     try {
-
+      console.log('***** MESSAGE HISTORY HIT ****')
       const historyUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/GetQueriesByIp'
       const token = localStorage.getItem('token');
       // Set the authorization header
@@ -102,38 +107,33 @@ const App = () => {
     )
   }
 
-  function deleteAllItems() {
+  const deleteAllItems = async () => {
     console.log('Button Pressed')
 
-    const deleteUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/DeleteAllByIp'
-    const beaerUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/VerifyBearer'
-    const token = localStorage.getItem('token');
 
+    try {
+
+    const deleteUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/DeleteAllByIp'
+    const token = localStorage.getItem('token');
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    fetch(deleteUrl, {
+
+   const response = await fetch(deleteUrl, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
-
       },
-      // Request body if required
     })
-      .then(response => {
-        // Handle the response
-        if (response.ok) {
     
-          // Successful DELETE request
-          // Perform any desired actions
-          setMessageHistory([])
-        } else {
-          // Handle errors
-          // You can check response.status and response.statusText for more details
-        }
-      })
-      .catch(error => {
-        // Handle network or other errors
-      });
+    const responseData = await response.data
+
+    console.log(responseData)
+    }
+    catch(error)
+    {
+      console.log(error)
+    }
+
   }
 
   useEffect(() => {
@@ -141,15 +141,11 @@ const App = () => {
 
      //Validify beaer token
 
-
-
-  return () => {
-    window.removeEventListener('resize', handleResize);
-    verifyBeaerToken()
-    getMessageHistory()
-  };
-    // getMessageHistory();
-  }, []);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      verifyBeaerToken()   
+    };
+    }, []);
 
   useEffect(() => {
 
@@ -299,7 +295,7 @@ const App = () => {
     {windowWidth >= 900 && <SideMenu messages={messageHistory} handleClick={deleteAllItems} />}
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ChatMessages messages={messageHistory} inputMessage={messages} />
-        {!isLoggedIn && !userHasSubmitted && (
+        {!isLoggedIn && (
         <div>
           <FadeIn delay={400}>
 
