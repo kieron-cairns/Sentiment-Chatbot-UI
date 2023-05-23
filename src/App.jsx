@@ -110,8 +110,7 @@ const App = () => {
 
     console.log(token)
 
-    
-
+    setIsLoggedIn(token !== undefined && token !== null);
   }, [messageHistory]);
 
 
