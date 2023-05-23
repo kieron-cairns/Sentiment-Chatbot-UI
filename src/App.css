@@ -202,4 +202,9 @@
   margin-bottom: 4vh;
 }
 
+.welcome-message {
+  padding-bottom: 85vh;
+  color: white;
+}
+
 /* Rest of your custom styles */

@@ -5,6 +5,8 @@ import axios from 'axios';
 import './App.css'
 import SignInModal from './Components/SignInModal';
 import { TypeAnimation } from 'react-type-animation';
+import WelcomeMessage from './Components/WelcomeMessage';
+import { render } from '@testing-library/react';
 
 const App = () => {
   const [messages, setMessages] = useState([]);
@@ -13,15 +15,17 @@ const App = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [displayButton, setDisplayButton] = useState(false);
+  const [userHasSubmitted, setUserHasSubmitted] = useState(false)
+  const [displayModal, setDisplayModal] = useState(false);
 
   let data; 
 
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setDisplayButton(true);
+      setDisplayModal(true);
       console.log("*** Button Should Display ****")
-    }, 3000);
+    }, 2500);
 
     return () => {
       clearTimeout(timer);
@@ -106,6 +110,8 @@ const App = () => {
 
     console.log(token)
 
+    
+
   }, [messageHistory]);
 
 
@@ -162,8 +168,10 @@ const App = () => {
 
   const handleSubmit = async (e) => {
 
+      setUserHasSubmitted(true)
+
       e.preventDefault();
-      
+
       if(!isLoggedIn)
       {
         console.log('User not logged in')
@@ -219,12 +227,39 @@ const App = () => {
       }
   };
 
+  function displayLoginModal() {
+    setTimeout(() => {
+      return( <div>
+      <SignInModal isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      </div>
+      )
+    }, 5000);
+  }
+
   return (
     <div className="chatbot-container">
-      <SignInModal isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      {/* {isLoggedIn === false && 
+
+        <h1>Hello World</h1>
+      } */}
+
+      {/* <SignInModal isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
     {windowWidth >= 900 && <SideMenu messages={messageHistory} handleClick={deleteAllItems} />}
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ChatMessages messages={messageHistory} inputMessage={messages} />
+        {!isLoggedIn && !userHasSubmitted && (
+        <div>
+          <WelcomeMessage />
+          {displayModal && (
+            <div>
+              <SignInModal
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+              />
+            </div>
+          )}
+        </div>
+      )}
         <form className="chatbot-form" onSubmit={handleSubmit}>
           <input
             type="text"
