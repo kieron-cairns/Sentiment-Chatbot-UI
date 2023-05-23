@@ -325,6 +325,7 @@ const App = () => {
               <SignInModal
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
+                getMessageHistory={getMessageHistory}
               />
           )}
           </FadeIn>

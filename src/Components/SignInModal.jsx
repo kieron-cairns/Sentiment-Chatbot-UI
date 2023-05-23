@@ -7,7 +7,7 @@ import FadeIn from 'react-fade-in/lib/FadeIn';
 const SignInModal = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(true);
   
-    const { isLoggedIn, setIsLoggedIn } = props;
+    const { isLoggedIn, setIsLoggedIn, getMessageHistory } = props;
 
 
     const [username, setUsername] = useState('');
@@ -40,6 +40,7 @@ const SignInModal = (props) => {
         // console.log('***** Decoded Token Is: *****');
         // console.log(decodedToken);
         setIsLoggedIn(true)
+        getMessageHistory()
       } catch (error) {
         console.error('Authentication failed:', error);
       }
