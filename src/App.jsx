@@ -316,7 +316,7 @@ const App = () => {
     {windowWidth >= 900 && <SideMenu messages={messageHistory} handleClick={deleteAllItems} />}
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ChatMessages messages={messageHistory} inputMessage={messages} />
-        {!isLoggedIn && (
+        {!isLoggedIn && !userHasSubmitted &&(
         <div>
           <FadeIn delay={400}>
 
