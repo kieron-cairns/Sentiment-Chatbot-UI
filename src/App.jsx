@@ -6,7 +6,7 @@ import './App.css'
 import SignInModal from './Components/SignInModal';
 import { TypeAnimation } from 'react-type-animation';
 import WelcomeMessage from './Components/WelcomeMessage';
-import { render } from '@testing-library/react';
+import FadeIn from 'react-fade-in/lib/FadeIn';
 
 const App = () => {
   const [messages, setMessages] = useState([]);
@@ -249,15 +249,17 @@ const App = () => {
         <ChatMessages messages={messageHistory} inputMessage={messages} />
         {!isLoggedIn && !userHasSubmitted && (
         <div>
+          <FadeIn delay={400}>
+
           <WelcomeMessage />
           {displayModal && (
-            <div>
               <SignInModal
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
               />
-            </div>
           )}
+          </FadeIn>
+
         </div>
       )}
         <form className="chatbot-form" onSubmit={handleSubmit}>
