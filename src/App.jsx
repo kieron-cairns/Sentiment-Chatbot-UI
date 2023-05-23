@@ -36,6 +36,30 @@ const App = () => {
     setWindowWidth(window.innerWidth);
   };
 
+  const verifyBeaerToken = async () => {
+    try {
+      const beaerUrl = ''
+      const token = localStorage.getItem('token');
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      const response = await fetch(beaerUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      })
+
+      const beaerData = await response.data
+
+      console.log(beaerData)
+
+    } catch(error)
+    {
+      console.log(error)
+    }
+  }
+
   const getMessageHistory = async () => {
     try {
 
@@ -47,9 +71,9 @@ const App = () => {
 
       const response = await fetch(historyUrl, {
         method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
       },
       });
       const jsonData = await response.json();
