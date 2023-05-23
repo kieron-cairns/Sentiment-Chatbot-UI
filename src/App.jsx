@@ -51,12 +51,16 @@ const App = () => {
         }
       })
 
-      const beaerData = await response.data
+      const beaerData = await response
 
       console.log(beaerData)
-      console.log('*** Beaer is legit ****')
-      setIsLoggedIn(true)
-      getMessageHistory()
+      if(response.status === 200)
+      {
+        console.log("RESPONSE IS 200")
+        setIsLoggedIn(true)
+        getMessageHistory()
+
+      }
       return true
 
     } catch(error)
@@ -64,7 +68,7 @@ const App = () => {
       console.log('*** Beaer is not legit ****')
 
       console.log(error)
-      setIsLoggedIn(false)
+      // setIsLoggedIn(false)
       return false
     }
   }
@@ -127,6 +131,8 @@ const App = () => {
     
     const responseData = await response.data
 
+    setMessageHistory([])
+
     console.log(responseData)
     }
     catch(error)
@@ -140,10 +146,11 @@ const App = () => {
      window.addEventListener('resize', handleResize);
 
      //Validify beaer token
+     verifyBeaerToken()   
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      verifyBeaerToken()   
+      // verifyBeaerToken()   
     };
     }, []);
 
@@ -249,7 +256,18 @@ const App = () => {
             },
           });
 
+
+          //Is beaer token expires, make the user re-login
+
+          if(response.status === 401)
+          {
+            setMessageHistory([])
+            setIsLoggedIn(false)
+
+          }
+
           data = response.data
+          
 
           try {
             data = await response.data
@@ -260,7 +278,7 @@ const App = () => {
           }
 
           console.log("************* response data ***************")
-          console.log(response.data)
+          console.log(response)
 
           console.log('Message History: ')
           console.log(messageHistory);
@@ -270,7 +288,10 @@ const App = () => {
           console.log(messageHistory);
 
         } catch (error) {
+          setMessageHistory([])
+            setIsLoggedIn(false)
           console.error('Error:', error);
+
         }
       }
   };
