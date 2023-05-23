@@ -162,53 +162,60 @@ const App = () => {
 
   const handleSubmit = async (e) => {
 
-
-   
       e.preventDefault();
-
-      if (inputValue.trim() === '') {
-        return;
-      }
-      const postSqlUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/PostToSql';
-
-      const body = JSON.stringify({ SentimentText: inputValue });
-
-      try {
-        // Get the token from local storage
-        const token = localStorage.getItem('token');
-
-        // Set the authorization header
-        // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-        const response = await axios.post(postSqlUrl, body, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-        });
-
-        data = response.data
-
-        try {
-          data = await response.data
-        }
-        catch (error) {
-          console.error('Error parsing JSON response:', error);
-          return;
-        }
-
-        console.log("************* response data ***************")
-        console.log(response.data)
-
-        console.log('Message History: ')
-        console.log(messageHistory);
-
+      
+      if(!isLoggedIn)
+      {
+        console.log('User not logged in')
         handleMessageSubmit(inputValue);
         setInputValue('');
-        console.log(messageHistory);
+      }
+      else
+      {
+        if (inputValue.trim() === '') {
+          return;
+        }
+        const postSqlUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/PostToSql';
 
-      } catch (error) {
-        console.error('Error:', error);
+        const body = JSON.stringify({ SentimentText: inputValue });
+
+        try {
+          // Get the token from local storage
+          const token = localStorage.getItem('token');
+
+          // Set the authorization header
+          // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+          const response = await axios.post(postSqlUrl, body, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+
+          data = response.data
+
+          try {
+            data = await response.data
+          }
+          catch (error) {
+            console.error('Error parsing JSON response:', error);
+            return;
+          }
+
+          console.log("************* response data ***************")
+          console.log(response.data)
+
+          console.log('Message History: ')
+          console.log(messageHistory);
+
+          handleMessageSubmit(inputValue);
+          setInputValue('');
+          console.log(messageHistory);
+
+        } catch (error) {
+          console.error('Error:', error);
+        }
       }
   };
 
