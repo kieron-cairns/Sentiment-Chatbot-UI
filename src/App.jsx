@@ -38,7 +38,20 @@ const App = () => {
 
   const getMessageHistory = async () => {
     try {
-      const response = await fetch('https://text-sentiment-analyser-web-api.azurewebsites.net/GetQueriesByIp');
+
+      const historyUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/GetQueriesByIp'
+      const token = localStorage.getItem('token');
+      // Set the authorization header
+
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      const response = await fetch(historyUrl, {
+        method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      });
       const jsonData = await response.json();
   
       const extractedQueryTextArray = jsonData.map(item => ({ queryText: item.queryText, queryResult: 'Sentiment result is ' + item.queryResult.toLowerCase() }));
@@ -108,14 +121,12 @@ const App = () => {
 
     console.log('****** JWT Token *****')
     const token = localStorage.getItem('token');
-
+    // var token = null
     // Set the authorization header
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     setIsLoggedIn(token !== undefined && token !== null);
 
     console.log(token)
-
-    
 
   }, [messageHistory]);
 
