@@ -68,7 +68,7 @@ const SignInModal = (props) => {
 
   const loginModalStyle = {
     overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0)"
+      backgroundColor: "rgba(0, 0, 0, 0.45)"
     },
     content: {
       top: "50%",
@@ -79,11 +79,18 @@ const SignInModal = (props) => {
       bottom: "auto",
       textAlign: "center",
       marginRight: "-50%",
-      borderRadius: "15px",
-      transform: "translate(-50%, -50%)"
+      borderRadius: "7.5px",
+      transform: "translate(-50%, -50%)",
+      backgroundColor: "#272729",
+      border: "solid 1px #1E2125",
     }
   };
 
+  const bg = {
+    overlay: {
+      background: "red"
+    }
+  };
   
   return (
 
@@ -92,9 +99,14 @@ const SignInModal = (props) => {
     style={loginModalStyle}
     closeTimeoutMS={300}
     onRequestClose={() => setIsOpen(false)}
+    classNames={{
+      overlay: "customOverlay",
+      modal: "customModal",
+    }}
   >
+    <div>
     <form onSubmit={authenticateUser}>
-    <h2>Please Login</h2>
+    <h2 style={{color: 'white'}}>Please Login</h2>
     {/* <div className='login-modal-form'> */}
     <input className='login-modal-input' value={username}  placeholder='Username' type='text' onChange={(e) => setUsername(e.target.value)}></input>
     {/* </div>
@@ -102,6 +114,7 @@ const SignInModal = (props) => {
     <input className='login-modal-input' value={password} placeholder='Password' type='password' onChange={(e) => setPassword(e.target.value)}></input>
     <button type='submit' className='login-modal-button'>Login</button>
     </form>
+    </div>
 
   </Modal>
 
