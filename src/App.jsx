@@ -10,6 +10,7 @@ const App = () => {
   const [messageHistory, setMessageHistory] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   let data; 
 
@@ -87,6 +88,15 @@ const App = () => {
 
   const handleMessageSubmit = (messageContent) => {
 
+    if(isLoggedIn === true)
+    {
+      console.log('**** user is logged in ****')
+    }
+    else
+    {
+      console.log('**** user is not logged in ****')
+    }
+
     console.log('*** handle message submit hit ***')
 
     const newMessage = {
@@ -125,32 +135,32 @@ const App = () => {
     const body = JSON.stringify({ SentimentText: inputValue });
 
 
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: body,
-      });
+    // try {
+    //   const response = await fetch(url, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: body,
+    //   });
 
-      if (!response.ok) {
-        throw new Error('Request failed');
-      }
+    //   if (!response.ok) {
+    //     throw new Error('Request failed');
+    //   }
 
-      try {
-        data = await response.json();
-      } catch (error) {
-        console.error('Error parsing JSON response:', error);
-        return;
-      }
+    //   try {
+    //     data = await response.json();
+    //   } catch (error) {
+    //     console.error('Error parsing JSON response:', error);
+    //     return;
+    //   }
 
      
-      handleMessageSubmit(inputValue);
-      setInputValue('');
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    //   handleMessageSubmit(inputValue);
+    //   setInputValue('');
+    // } catch (error) {
+    //   console.error('Error:', error);
+    // }
 
     try {
       // Get the token from local storage
@@ -165,21 +175,30 @@ const App = () => {
           'Authorization': `Bearer ${token}`,
         },
       });
+
+      data = response.data
+
       
 
-      if (!response.ok) {
-        throw new Error('Request failed');
-      }
+      // if (!response.ok) {
+      
+      //   console.log(response)
+      //   console.log(response.data)
 
-      console.log("************* response data ***************")
+      //   throw new Error('Request failed');
+      // }
+
+     
+
+      // try {
+      //   data = await response.json();
+      // } catch (error) {
+      //   console.error('Error parsing JSON response:', error);
+      //   return;
+      // }
+
+       console.log("************* response data ***************")
       console.log(response.data)
-
-      try {
-        data = await response.json();
-      } catch (error) {
-        console.error('Error parsing JSON response:', error);
-        return;
-      }
 
       console.log('Message History: ')
       console.log(messageHistory);
@@ -196,7 +215,7 @@ const App = () => {
 
   return (
     <div className="chatbot-container">
-      <SignInModal />
+      <SignInModal isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
     {windowWidth >= 900 && <SideMenu messages={messageHistory} handleClick={deleteAllItems} />}
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ChatMessages messages={messageHistory} inputMessage={messages} />
