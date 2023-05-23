@@ -104,11 +104,18 @@ const App = () => {
 
   function deleteAllItems() {
     console.log('Button Pressed')
-    fetch('https://text-sentiment-analyser-web-api.azurewebsites.net/DeleteAllByIp', {
+
+    const deleteUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/DeleteAllByIp'
+    const beaerUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/VerifyBearer'
+    const token = localStorage.getItem('token');
+
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    fetch(deleteUrl, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        // Additional headers if required
+        'Authorization': `Bearer ${token}`,
+
       },
       // Request body if required
     })
