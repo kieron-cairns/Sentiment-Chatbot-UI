@@ -32,51 +32,13 @@ const App = () => {
     };
   }, []);
 
-
-    // // Function to handle the beforeunload event, removal of token
-    // const handleBeforeUnload = () => {
-    //   localStorage.removeItem('token'); // Remove the token from localStorage
-    //   // Alternatively, you can set it to null like this:
-    //   // localStorage.setItem('token', null);
-    // };
-
-    // // Add an event listener for the beforeunload event
-    // useEffect(() => {
-    //   window.addEventListener('beforeunload', handleBeforeUnload);
-      
-    //   return () => {
-    //     window.removeEventListener('beforeunload', handleBeforeUnload);
-    //   };
-    // }, []);
-
-// The rest of your component...
-
-
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
   };
 
   const getMessageHistory = async () => {
-
-    const sqlHistoryUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/GetQueriesByIp'
-
     try {
-
-      // Get the token from local storage
-      const token = localStorage.getItem('token');
-
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-      console.log('***** Get Message History Hit. token is: *****')
-      console.log(token)
-
-      const response = await fetch(sqlHistoryUrl, {
-        headers: {
-          'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
-        }
-
-      });
+      const response = await fetch('https://text-sentiment-analyser-web-api.azurewebsites.net/GetQueriesByIp');
       const jsonData = await response.json();
   
       const extractedQueryTextArray = jsonData.map(item => ({ queryText: item.queryText, queryResult: 'Sentiment result is ' + item.queryResult.toLowerCase() }));
@@ -101,16 +63,11 @@ const App = () => {
 
   function deleteAllItems() {
     console.log('Button Pressed')
-
-    const deleteUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/DeleteAllByIp';
-
-    
-
-    fetch(deleteUrl, {
+    fetch('https://text-sentiment-analyser-web-api.azurewebsites.net/DeleteAllByIp', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        // Additional headers if required
       },
       // Request body if required
     })
@@ -153,7 +110,8 @@ const App = () => {
 
     console.log(token)
 
-    setIsLoggedIn(token !== undefined && token !== null);
+    
+
   }, [messageHistory]);
 
 
@@ -298,7 +256,6 @@ const App = () => {
               <SignInModal
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
-                getMessageHistory={getMessageHistory}
               />
           )}
           </FadeIn>
