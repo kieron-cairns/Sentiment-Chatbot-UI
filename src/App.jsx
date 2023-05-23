@@ -86,16 +86,19 @@ const App = () => {
 
   }, [messageHistory]);
 
+  const userNotLoggedInSubmit = () => {
+    setTimeout(() => {
+      const botResponse = {
+       
+        queryResult: 'You are currently not logged in, please login to continue. . .',
+        sender: 'bot',
+      };
+      setMessageHistory([...messageHistory, botResponse]);
+    }, 500);
+  }
+
   const handleMessageSubmit = (messageContent) => {
 
-    if(isLoggedIn === true)
-    {
-      console.log('**** user is logged in ****')
-    }
-    else
-    {
-      console.log('**** user is not logged in ****')
-    }
 
     console.log('*** handle message submit hit ***')
 
@@ -104,6 +107,10 @@ const App = () => {
       queryText: messageContent,
       sender: 'user'
     }
+
+    const botMessageContent = !isLoggedIn
+    ? 'You are currently not logged in. Please login to continue...'
+    : `Sentiment result is ${data.result.toLowerCase()}`;
 
     console.log(messageHistory)
 
@@ -115,7 +122,7 @@ const App = () => {
       setTimeout(() => {
         const botResponse = {
          
-          queryResult: ` Sentiment result is ${data.result.toLowerCase()}`,
+          queryResult: botMessageContent,
           sender: 'bot',
         };
         setMessageHistory([...messageHistory, newMessage, botResponse]);
@@ -123,52 +130,61 @@ const App = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    if (inputValue.trim() === '') {
-      return;
-    }
-    const postSqlUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/PostToSql';
 
-    const body = JSON.stringify({ SentimentText: inputValue });
+    // if(!isLoggedIn)
+    // {
+    //   userNotLoggedInSubmit()
+    // }
+    // else
+    // {
+      e.preventDefault();
 
-    try {
-      // Get the token from local storage
-      const token = localStorage.getItem('token');
-
-      // Set the authorization header
-      // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-      const response = await axios.post(postSqlUrl, body, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
-      data = response.data
-
-      try {
-        data = await response.data
-      }
-      catch (error) {
-        console.error('Error parsing JSON response:', error);
+      if (inputValue.trim() === '') {
         return;
       }
+      const postSqlUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/PostToSql';
 
-       console.log("************* response data ***************")
-      console.log(response.data)
+      const body = JSON.stringify({ SentimentText: inputValue });
 
-      console.log('Message History: ')
-      console.log(messageHistory);
+      try {
+        // Get the token from local storage
+        const token = localStorage.getItem('token');
 
-      handleMessageSubmit(inputValue);
-      setInputValue('');
-      console.log(messageHistory);
+        // Set the authorization header
+        // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-    } catch (error) {
-      console.error('Error:', error);
-    }
+        const response = await axios.post(postSqlUrl, body, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        data = response.data
+
+        try {
+          data = await response.data
+        }
+        catch (error) {
+          console.error('Error parsing JSON response:', error);
+          return;
+        }
+
+        console.log("************* response data ***************")
+        console.log(response.data)
+
+        console.log('Message History: ')
+        console.log(messageHistory);
+
+        handleMessageSubmit(inputValue);
+        setInputValue('');
+        console.log(messageHistory);
+
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    // }
   };
 
   return (
