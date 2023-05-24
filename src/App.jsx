@@ -6,6 +6,7 @@ import SignInModal from './Components/SignInModal';
 import { TypeAnimation } from 'react-type-animation';
 import './App.css'
 
+
 const App = () => {
   const [messages, setMessages] = useState([]);
   const [messageHistory, setMessageHistory] = useState([]);
@@ -30,18 +31,14 @@ const App = () => {
       setDisplayModal(true);
       console.log("*** Button Should Display ****")
     }, 2500);
-
     
-    const botResponse = {
+    // const botResponse = {
        
-      queryResult: 'Hello, I am a sentiment analysis chatbot. I will try and tell you if what you enter is a positive or negative statement.',
-      sender: 'bot',
-    };
-    
-
-    setMessageHistory([...messageHistory, botResponse]);
+    //   queryResult: 'Hello, I am a sentiment analysis chatbot. I will try and tell you if what you enter is a positive or negative statement.',
+    //   sender: 'bot',
+    // };
+    // setMessageHistory([...messageHistory, botResponse]);
   
-
     return () => {
       clearTimeout(timer);
     };
@@ -52,6 +49,13 @@ const App = () => {
   };
 
   const verifyBeaerToken = async () => {
+
+
+    // if(appRefreshed && !isLoggedIn)
+    // {
+         
+    // }
+
     console.log('***** TOKEN BEING VERIFIED ****')
     try {
       const beaerUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/VerifyBearer'
@@ -75,6 +79,19 @@ const App = () => {
         setIsLoggedIn(true)
         getMessageHistory()
 
+      }
+      //If status code is 401
+      else if(response.status === 401)
+      {
+
+        setIsLoggedIn(false)
+
+        const botResponse = {
+       
+          queryResult: 'Hello, I am a sentiment analysis chatbot. I will try and tell you if what you enter is a positive or negative statement.',
+          sender: 'bot',
+        };
+        setMessageHistory([...messageHistory, botResponse]);
       }
       return true
 
@@ -381,17 +398,8 @@ const App = () => {
   };
 
   const handleClick = () => {
-    // setIsClicked(true);
-
     setIsClicked(prevState => !prevState)
-    // console.log(isClicked)
-
   };
-
-  const fadeInAnimtation = {
-    opacity: 1,
-    transition: 'opacity 10.5s'
-  }
 
   useEffect(() => {
   console.log('***** IS CLICKED: *****')
@@ -411,23 +419,14 @@ const App = () => {
         <ChatMessages messages={messageHistory} />
         {appRefreshed && !isLoggedIn && !isSignedOut && !userHasSubmitted &&(
         <div>
-
-          {/* <WelcomeMessage /> */}
-
-
          {displayLoginModal()}
-
         </div>
       )}
        {!isLoggedIn && isClicked &&(
         <div>
-         
           {displayLoginModal()}
-
-
         </div>
       )}
-
         <form className="chatbot-form" onSubmit={handleSubmit}>
           <input
             type="text"
