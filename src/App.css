@@ -58,6 +58,15 @@
   color: white;
 }
 
+.login-side-menu-button {
+  background-color: red;
+}
+
+.logout-side-menu-button {
+  background-color: red;
+}
+
+
 /* .sign-in-modal {
   background-color: #1E2125;
   height: 50vh;
