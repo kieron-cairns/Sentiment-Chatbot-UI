@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-const SideMenu = ({handleSignIn, handleSignOut, handleClick, isLoggedIn}) => {
+const SideMenu = ({handleSignIn, handleSignOut, handleClick, isLoggedIn, setIsLoggedIn}) => {
   
   const [display, setDisplay] = useState(false);
 
@@ -30,6 +30,8 @@ const SideMenu = ({handleSignIn, handleSignOut, handleClick, isLoggedIn}) => {
     )
 
   }
+
+ 
 
   const conditionalLoginButtontext = isLoggedIn ? 'Logout' : 'Login'
 
