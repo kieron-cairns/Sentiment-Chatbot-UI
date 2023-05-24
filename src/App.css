@@ -229,9 +229,9 @@
   color: white;
 }
 
-/* .ReactModal__Overlay {
+.ReactModal__Overlay {
   opacity: 0;
-  transition: opacity 500ms ease-in-out;
+  transition: opacity 400ms ease-in-out;
 }
 
 .ReactModal__Overlay--after-open{
@@ -240,16 +240,10 @@
 
 .ReactModal__Overlay--before-close{
   opacity: 0;
-} */
-
-.fade-in {
-  opacity: 0;
-  transition: opacity 3.3s ease-in-out;
 }
 
-.fade-in.active {
-  opacity: 1;
-}
+
+
 
 
 /* Rest of your custom styles */

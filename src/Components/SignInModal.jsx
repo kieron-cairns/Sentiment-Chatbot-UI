@@ -73,7 +73,9 @@ const SignInModal = (props) => {
 
   const loginModalStyle = {
     overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.45)"
+      backgroundColor: "rgba(0, 0, 0, 0.45)",
+      // transition: "opacity 5.5s",
+
     },
     content: {
       top: "50%",
@@ -108,7 +110,6 @@ const SignInModal = (props) => {
 
   
   return (
-
     <Modal
     isOpen={modalIsOpen}
     style={loginModalStyle}
@@ -117,7 +118,6 @@ const SignInModal = (props) => {
     classNames={{
       overlay: "customOverlay",
       modal: "customModal",
-      afterOpen: "fade-in active"
     }}
   >
     <div>
@@ -133,7 +133,6 @@ const SignInModal = (props) => {
     </div>
 
   </Modal>
-
   );
 };
 

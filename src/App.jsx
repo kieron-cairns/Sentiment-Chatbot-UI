@@ -381,6 +381,10 @@ const App = () => {
 
   };
 
+  const fadeInAnimtation = {
+    opacity: 1,
+    transition: 'opacity 10.5s'
+  }
 
   useEffect(() => {
   console.log('***** IS CLICKED: *****')
