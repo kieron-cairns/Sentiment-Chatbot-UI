@@ -7,7 +7,7 @@ const SideMenu = ({handleSignIn, handleSignOut, handleClick, isLoggedIn, setIsLo
   useEffect(() => {
     const timer = setTimeout(() => {
       setDisplay(true)
-    }, 600);
+    }, 325);
   })
 
   const conditionalLoginButtonStyle = {
@@ -37,15 +37,15 @@ const SideMenu = ({handleSignIn, handleSignOut, handleClick, isLoggedIn, setIsLo
 
   return (
     <div className="side-menu">
-      <h2>Simple Sentiment Analysis Chat Bot</h2>
+      <h2>Sentiment Analysis Chat Bot</h2>
       <button  onClick={handleClick} >Delete History</button>
      
       
-      {isLoggedIn && (
+      {isLoggedIn && display && (
       <button style={{backgroundColor: '#8B0000', marginTop: '1vh'}} onClick={handleSignOut}>Logout</button>
 
       )}
-      {!isLoggedIn && (
+      {!isLoggedIn && display &&(
       <button style={{backgroundColor: '#454654', marginTop: '1vh'}} className='login-side-menu-button'  onClick={handleSignIn}>Login</button>
 
       )}
