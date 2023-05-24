@@ -107,7 +107,7 @@ const App = () => {
   
       const extractedQueryTextArray = jsonData.map(item => ({ queryText: item.queryText, queryResult: 'Sentiment result is ' + item.queryResult.toLowerCase() }));
   
-      const updatedMessageHistory = [...messageHistory, ...extractedQueryTextArray];
+      const updatedMessageHistory = [messageHistory, ...extractedQueryTextArray];
   
       setMessageHistory(updatedMessageHistory);
 
@@ -370,7 +370,7 @@ const App = () => {
       } */}
 
       {/* <SignInModal isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
-    {windowWidth >= 900 && <SideMenu messages={messageHistory} handleSignOut={handleSignOut} handleClick={deleteAllItems} />}
+    {windowWidth >= 900 && <SideMenu messages={messageHistory} isLoggedIn={isLoggedIn} handleSignOut={handleSignOut} handleClick={deleteAllItems} />}
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ChatMessages messages={messageHistory} inputMessage={messages} />
         {!isLoggedIn && !userHasSubmitted && (
@@ -387,6 +387,8 @@ const App = () => {
                 setMessageHistory={setMessageHistory}
                 isClicked={isClicked}
                 setIsClicked={setIsClicked}
+                messageHistory={messageHistory}
+
               />
           )}
           {/* </FadeIn> */}
@@ -406,6 +408,7 @@ const App = () => {
                 setMessageHistory={setMessageHistory}
                 isClicked={isClicked}
                 setIsClicked={setIsClicked}
+                messageHistory={messageHistory}
               />
           )}
           {/* </FadeIn> */}
