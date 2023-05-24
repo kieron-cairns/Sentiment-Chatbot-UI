@@ -26,7 +26,7 @@ const App = () => {
     const timer = setTimeout(() => {
       setDisplayModal(true);
       console.log("*** Button Should Display ****")
-    }, 2500);
+    }, 2750);
 
     return () => {
       clearTimeout(timer);
@@ -160,6 +160,8 @@ const App = () => {
   const handleSignOut = () => {
 
     localStorage.removeItem('token')
+    setIsLoggedIn(false)
+    window.location.reload()
 
   }
 
@@ -168,6 +170,7 @@ const App = () => {
 
      //Validify beaer token
      verifyBeaerToken()   
+     setUserHasSubmitted(false)
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -375,6 +378,7 @@ const App = () => {
           {/* <FadeIn delay={400}> */}
 
           <WelcomeMessage />
+
           {displayModal && (
               <SignInModal
                 isLoggedIn={isLoggedIn}
