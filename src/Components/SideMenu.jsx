@@ -8,33 +8,7 @@ const SideMenu = ({handleSignIn, handleSignOut, handleClick, isLoggedIn, setIsLo
     const timer = setTimeout(() => {
       setDisplay(true)
     }, 325);
-  })
-
-  const conditionalLoginButtonStyle = {
-    color: isLoggedIn ? 'red' : 'red',
-    
-  }
-
-  const displaySideMenuButtons = () => {
-
-    return(
-      <div>
-        {isLoggedIn && display && (
-      <button onClick={handleSignOut}>Logout</button>
-
-      )}
-      {!isLoggedIn && display &&(
-      <button onClick={handleSignIn}>Login</button>
-
-      )}
-      </div>
-    )
-
-  }
-
- 
-
-  const conditionalLoginButtontext = isLoggedIn ? 'Logout' : 'Login'
+  }) 
 
   return (
     <div className="side-menu">
