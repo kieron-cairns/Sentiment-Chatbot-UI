@@ -13,9 +13,11 @@ const App = () => {
   const [inputValue, setInputValue] = useState('');
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isSignedOut, setIsSignedOut] = useState(false)
   const [isClicked, setIsClicked] = useState(false);
   const [userHasSubmitted, setUserHasSubmitted] = useState(false)
   const [displayModal, setDisplayModal] = useState(false);
+  const [appRefreshed, setAppRefreshed] = useState(false)
 
 
 
@@ -23,6 +25,12 @@ const App = () => {
 
 
   useEffect(() => {
+
+    
+    setAppRefreshed(true)
+
+    console.log("****** APP REFRESHED *****")
+
     const timer = setTimeout(() => {
       setDisplayModal(true);
       console.log("*** Button Should Display ****")
@@ -168,6 +176,7 @@ const App = () => {
           isClicked={isClicked}
           setIsClicked={setIsClicked}
           messageHistory={messageHistory}
+          setAppRefreshed={setAppRefreshed}
 
         />
     )}
@@ -191,10 +200,10 @@ const App = () => {
    
     console.log('sign out is clicked is clciked is: ')
     setIsClicked(false)
-
-    console.log(isClicked)
-
-    setIsLoggedIn(prevState => !prevState)
+    localStorage.removeItem('token')
+    // console.log(isClicked)
+    setIsSignedOut(true)
+    setIsLoggedIn(false)
     // setDisplayModal(false)
     // setIsClicked(false)
     // window.location.reload()
@@ -389,7 +398,7 @@ const App = () => {
     {windowWidth >= 900 && <SideMenu messages={messageHistory} isLoggedIn={isLoggedIn} handleSignIn={handleSignIn} handleSignOut={handleSignOut} handleClick={deleteAllItems} />}
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ChatMessages messages={messageHistory} inputMessage={messages} />
-        {/* {!isLoggedIn && (
+        {appRefreshed && !isLoggedIn && !isSignedOut &&(
         <div>
 
           <WelcomeMessage />
@@ -397,7 +406,7 @@ const App = () => {
          {displayLoginModal()}
 
         </div>
-      )} */}
+      )}
        {!isLoggedIn && isClicked &&(
         <div>
          
@@ -406,6 +415,7 @@ const App = () => {
 
         </div>
       )}
+
         <form className="chatbot-form" onSubmit={handleSubmit}>
           <input
             type="text"

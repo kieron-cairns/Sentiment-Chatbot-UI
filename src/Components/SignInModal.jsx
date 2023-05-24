@@ -6,7 +6,7 @@ import jwt_decode from 'jwt-decode';
 const SignInModal = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(true);
   
-    const { isLoggedIn, setIsLoggedIn, getMessageHistory, setMessageHistory, setIsClicked, messageHistory} = props;
+    const { isLoggedIn, setIsLoggedIn, getMessageHistory, setMessageHistory, setIsClicked, setAppRefreshed} = props;
 
 
     const [username, setUsername] = useState('');
@@ -40,8 +40,9 @@ const SignInModal = (props) => {
         // console.log(decodedToken);
         setIsLoggedIn(true)
         setMessageHistory([])
+        setAppRefreshed(false)
 
-
+        console.log("****** APP REFRESHED: " +  + "*****")
 
         getMessageHistory()
         // window.location.reload()
