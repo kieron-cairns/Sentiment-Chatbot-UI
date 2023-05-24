@@ -99,10 +99,6 @@ const SignInModal = (props) => {
     console.log('*** MODAL SET IS CLICKED CLOSE ***')
     setIsClicked(false)
     
-
-
-
-    // setIsLoggedIn(false); // Set the boolean variable to false when the modal is closed
   };
 
   

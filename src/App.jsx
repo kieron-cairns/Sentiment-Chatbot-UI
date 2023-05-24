@@ -76,6 +76,9 @@ const App = () => {
   }
 
   const getMessageHistory = async () => {
+
+    setMessageHistory([])
+
     try {
       console.log('***** MESSAGE HISTORY HIT ****')
       const historyUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/GetQueriesByIp'
