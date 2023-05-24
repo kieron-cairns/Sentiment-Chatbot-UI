@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import FadeIn from 'react-fade-in/lib/FadeIn';
 
 const SignInModal = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(true);
