@@ -77,9 +77,17 @@ const App = () => {
 
   const getMessageHistory = async () => {
 
+    console.log('*** Message History Hit - Current Messages Are: ***')
+
+    console.log(messageHistory)
+
+    console.log('*** Attempt message history delete - Current Messages Are: ***')
+
     setMessageHistory([])
+    console.log(messageHistory)
 
     try {
+
       console.log('***** MESSAGE HISTORY HIT ****')
       const historyUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/GetQueriesByIp'
       const token = localStorage.getItem('token');
