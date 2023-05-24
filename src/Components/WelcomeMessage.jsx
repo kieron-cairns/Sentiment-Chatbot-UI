@@ -9,7 +9,7 @@ const DisplayWelcomeMessage = () => {
     useEffect(() => {
       const timer = setTimeout(() => {
         setDisplay(true);
-      }, 750);
+      }, 500);
   
       return () => clearTimeout(timer);
     }, []);

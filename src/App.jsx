@@ -26,7 +26,7 @@ const App = () => {
     const timer = setTimeout(() => {
       setDisplayModal(true);
       console.log("*** Button Should Display ****")
-    }, 2750);
+    }, 2500);
 
     return () => {
       clearTimeout(timer);
