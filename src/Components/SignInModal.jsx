@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
 const SignInModal = (props) => {
-  const [modalIsOpen, setIsOpen] = React.useState(true);
-  
-    const { isLoggedIn, setIsLoggedIn, getMessageHistory, setMessageHistory, setIsClicked, setAppRefreshed} = props;
+  const [modalIsOpen, setIsOpen] = useState(true);
+  const [invalidCreds, setInvalidCreds] = useState(false)
+    
+  const {setIsLoggedIn, getMessageHistory, setMessageHistory, setIsClicked, setAppRefreshed} = props;
 
 
     const [username, setUsername] = useState('');
@@ -47,7 +48,9 @@ const SignInModal = (props) => {
         getMessageHistory()
         // window.location.reload()
       } catch (error) {
+        setInvalidCreds(true)
         console.error('Authentication failed:', error);
+
       }
     }
     
@@ -81,7 +84,7 @@ const SignInModal = (props) => {
       top: "50%",
       left: "55%",
       width: "50vh",
-      height: "35vh",
+      height: "36vh",
       right: "auto",
       bottom: "auto",
       textAlign: "center",
@@ -108,6 +111,18 @@ const SignInModal = (props) => {
     
   };
 
+
+  useEffect(() => {
+    if (invalidCreds) {
+      const timer = setTimeout(() => {
+        setInvalidCreds(false);
+      }, 1500); // Adjust the time in milliseconds (e.g., 3000 for 3 seconds)
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [invalidCreds]);
   
   return (
     <Modal
@@ -130,6 +145,10 @@ const SignInModal = (props) => {
     <input className='login-modal-input' value={password} placeholder='Password' type='password' onChange={(e) => setPassword(e.target.value)}></input>
     <button type='submit' className='login-modal-button'>Login</button>
     </form>
+    {invalidCreds && (
+    <h3>Incorrect Credentials</h3>
+
+    )}
     </div>
 
   </Modal>

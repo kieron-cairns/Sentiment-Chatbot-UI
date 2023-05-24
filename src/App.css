@@ -242,4 +242,9 @@
   opacity: 0;
 }
 
+.basket {
+  transition: opacity 2.5s;
+  opacity: 1;
+}
+
 /* Rest of your custom styles */
