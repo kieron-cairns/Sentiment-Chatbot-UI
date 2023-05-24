@@ -14,9 +14,11 @@ const App = () => {
   const [inputValue, setInputValue] = useState('');
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [displayButton, setDisplayButton] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
   const [userHasSubmitted, setUserHasSubmitted] = useState(false)
   const [displayModal, setDisplayModal] = useState(false);
+
+
 
   let data; 
 
@@ -183,7 +185,8 @@ const App = () => {
     }
 
     const showBotLoginButton = (
-      <button>Login</button>
+      <button onClick={handleClick}
+      onMouseUp={handleMouseUp}>Login</button>
     );
   
     const botMessageContent = !isLoggedIn
@@ -305,6 +308,28 @@ const App = () => {
     }, 5000);
   }
 
+  const handleClick = () => {
+    // setIsClicked(true);
+
+    setIsClicked(prevState => !prevState)
+    // console.log(isClicked)
+
+  };
+
+  const handleMouseUp = () => {
+    // setIsClicked(false)
+    // setIsClicked(prevState => !prevState)
+
+    // console.log(isClicked)
+
+   
+
+  }
+
+  useEffect(() => {
+console.log(isClicked)
+  }, [isClicked])
+
   return (
     <div className="chatbot-container">
       {/* {isLoggedIn === false && 
@@ -316,11 +341,27 @@ const App = () => {
     {windowWidth >= 900 && <SideMenu messages={messageHistory} handleClick={deleteAllItems} />}
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ChatMessages messages={messageHistory} inputMessage={messages} />
-        {!isLoggedIn && !userHasSubmitted &&(
+        {!isLoggedIn && !userHasSubmitted && (
         <div>
           <FadeIn delay={400}>
 
           <WelcomeMessage />
+          {displayModal && (
+              <SignInModal
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+                getMessageHistory={getMessageHistory}
+              />
+          )}
+          </FadeIn>
+
+        </div>
+      )}
+       {!isLoggedIn && isClicked &&(
+        <div>
+          <FadeIn delay={400}>
+
+          {/* <WelcomeMessage /> */}
           {displayModal && (
               <SignInModal
                 isLoggedIn={isLoggedIn}

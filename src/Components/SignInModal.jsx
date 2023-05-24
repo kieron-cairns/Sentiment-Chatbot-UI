@@ -91,6 +91,13 @@ const SignInModal = (props) => {
       background: "red"
     }
   };
+
+  const handleModalClose = () => {
+    console.log('*** MODAL CLOSE ***')
+    setIsOpen(false);
+    // setIsLoggedIn(false); // Set the boolean variable to false when the modal is closed
+  };
+
   
   return (
 
@@ -98,7 +105,7 @@ const SignInModal = (props) => {
     isOpen={modalIsOpen}
     style={loginModalStyle}
     closeTimeoutMS={300}
-    onRequestClose={() => setIsOpen(false)}
+    onRequestClose={handleModalClose} // Call handleModalClose when the modal is closed
     classNames={{
       overlay: "customOverlay",
       modal: "customModal",
