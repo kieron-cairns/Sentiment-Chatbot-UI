@@ -23,7 +23,16 @@ const DisplayWelcomeMessage = () => {
             cursor={0}
             repeat={0}
             speed={90}
-            style={{ fontSize: '1.5em', display: 'inline-block', textAlign: 'center', width: '90vh' }}
+            style={{ 
+              fontSize: '1.5em', 
+              display: 'inline-block', 
+              textAlign: 'center', 
+              width: '90vh', 
+              fontWeight: 'bold',
+              marginLeft: '20vh',
+              marginRight: '20vh'
+
+            }}
           />
         )}
       </div>

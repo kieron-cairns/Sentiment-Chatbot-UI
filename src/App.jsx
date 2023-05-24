@@ -28,6 +28,12 @@ const App = () => {
 
     
     setAppRefreshed(true)
+    const botResponse = {
+       
+      queryResult: 'Hello, I am a sentiment analysis chatbot. I will try and tell you if what you enter is a positive or negative statement.',
+      sender: 'bot',
+    };
+    setMessageHistory([...messageHistory, botResponse]);
 
     console.log("****** APP REFRESHED *****")
 
@@ -195,6 +201,18 @@ const App = () => {
 
   }
 
+  const setWelcomeMessage = () => {
+   
+    // setTimeout(() => {
+      const botResponse = {
+       
+        queryResult: 'Blah Blah',
+        sender: 'bot',
+      };
+      setMessageHistory([...messageHistory, botResponse]);
+    // }, 500);
+  }
+
   const handleSignOut = () => {
     setMessageHistory([])
    
@@ -260,7 +278,7 @@ const App = () => {
     }
 
     const showBotLoginButton = (
-      <button onClick={handleClick}>Login</button>
+      <button className='chatbot-login-button' onClick={handleClick}>Login</button>
     );
   
     const botMessageContent = !isLoggedIn
@@ -402,10 +420,11 @@ const App = () => {
     {windowWidth >= 900 && <SideMenu messages={messageHistory} isLoggedIn={isLoggedIn} handleSignIn={handleSignIn} handleSignOut={handleSignOut} handleClick={deleteAllItems} />}
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ChatMessages messages={messageHistory} inputMessage={messages} />
-        {appRefreshed && !isLoggedIn && !isSignedOut &&(
+        {appRefreshed && !isLoggedIn && !isSignedOut && !userHasSubmitted &&(
         <div>
 
-          <WelcomeMessage />
+          {/* <WelcomeMessage /> */}
+
 
          {displayLoginModal()}
 

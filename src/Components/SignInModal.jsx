@@ -146,7 +146,7 @@ const SignInModal = (props) => {
     <button type='submit' className='login-modal-button'>Login</button>
     </form>
     {invalidCreds && (
-    <h3>Incorrect Credentials</h3>
+    <h3 className='sign-in-invalid-msg'>Incorrect Credentials</h3>
 
     )}
     </div>
