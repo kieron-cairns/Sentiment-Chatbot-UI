@@ -176,14 +176,24 @@ const App = () => {
   }
 
   const handleSignIn = () => {
+    console.log('handle sign in hit')
+    // return (
+    //   <div>
+    //   {displayLoginModal()}
+    //   </div>
+    // )
+    setIsClicked(prevState => !prevState)
 
   }
 
   const handleSignOut = () => {
-
+    setMessageHistory([])
     localStorage.removeItem('token')
+    setUserHasSubmitted(false)
     setIsLoggedIn(false)
-    window.location.reload()
+    setDisplayModal(false)
+    setIsClicked(false)
+    // window.location.reload()
 
   }
 
@@ -371,7 +381,7 @@ const App = () => {
       } */}
 
       {/* <SignInModal isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
-    {windowWidth >= 900 && <SideMenu messages={messageHistory} isLoggedIn={isLoggedIn} handleSignOut={handleSignOut} handleClick={deleteAllItems} />}
+    {windowWidth >= 900 && <SideMenu messages={messageHistory} isLoggedIn={isLoggedIn} handleSignIn={handleSignIn} handleSignOut={handleSignOut} handleClick={deleteAllItems} />}
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ChatMessages messages={messageHistory} inputMessage={messages} />
         {!isLoggedIn && !userHasSubmitted && (

@@ -23,7 +23,7 @@ const SideMenu = ({handleSignIn, handleSignOut, handleClick, isLoggedIn}) => {
 
       )}
       {!isLoggedIn && display &&(
-      <button onClick={handleSignOut}>Login</button>
+      <button onClick={handleSignIn}>Login</button>
 
       )}
       </div>
@@ -38,13 +38,13 @@ const SideMenu = ({handleSignIn, handleSignOut, handleClick, isLoggedIn}) => {
       <h2>Simple Sentiment Analysis Chat Bot</h2>
       <button  onClick={handleClick} >Delete History</button>
      
-      {/* {displaySideMenuButtons()} */}
+      
       {isLoggedIn && (
       <button onClick={handleSignOut}>Logout</button>
 
       )}
       {!isLoggedIn && (
-      <button onClick={handleSignOut}>Login</button>
+      <button onClick={handleSignIn}>Login</button>
 
       )}
      
