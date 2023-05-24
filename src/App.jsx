@@ -76,14 +76,16 @@ const App = () => {
 
   const getMessageHistory = async () => {
 
-    console.log('*** Message History Hit - Current Messages Are: ***')
+    // console.log('*** Message History Hit - Current Messages Are: ***')
 
-    console.log(messageHistory)
+    // console.log(messageHistory)
 
-    console.log('*** Attempt message history delete - Current Messages Are: ***')
+    // console.log('*** Attempt message history delete - Current Messages Are: ***')
 
-    setMessageHistory([])
-    console.log(messageHistory)
+    // setMessageHistory([])
+    // console.log(messageHistory)
+
+    // window.location.reload()
 
     try {
 
@@ -154,6 +156,13 @@ const App = () => {
 
   }
 
+
+  const handleSignOut = () => {
+
+    localStorage.removeItem('token')
+
+  }
+
   useEffect(() => {
      window.addEventListener('resize', handleResize);
 
@@ -179,8 +188,15 @@ const App = () => {
 
     console.log(token)
 
-  }, [messageHistory]);
+  }, []);
 
+  useEffect(() => {
+
+
+    console.log('*** Updated Message History - Current Messages Are: ***');
+    console.log(messageHistory);
+
+  }, [messageHistory])
 
 
   const handleMessageSubmit = (messageContent) => {
@@ -351,7 +367,7 @@ const App = () => {
       } */}
 
       {/* <SignInModal isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
-    {windowWidth >= 900 && <SideMenu messages={messageHistory} handleClick={deleteAllItems} />}
+    {windowWidth >= 900 && <SideMenu messages={messageHistory} handleSignOut={handleSignOut} handleClick={deleteAllItems} />}
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ChatMessages messages={messageHistory} inputMessage={messages} />
         {!isLoggedIn && !userHasSubmitted && (
@@ -364,6 +380,7 @@ const App = () => {
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
                 getMessageHistory={getMessageHistory}
+                setMessageHistory={setMessageHistory}
                 isClicked={isClicked}
                 setIsClicked={setIsClicked}
               />
@@ -382,6 +399,7 @@ const App = () => {
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
                 getMessageHistory={getMessageHistory}
+                setMessageHistory={setMessageHistory}
                 isClicked={isClicked}
                 setIsClicked={setIsClicked}
               />

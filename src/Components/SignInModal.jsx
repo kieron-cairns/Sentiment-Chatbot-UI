@@ -6,7 +6,7 @@ import jwt_decode from 'jwt-decode';
 const SignInModal = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(true);
   
-    const { isLoggedIn, setIsLoggedIn, getMessageHistory, isClicked, setIsClicked} = props;
+    const { isLoggedIn, setIsLoggedIn, getMessageHistory, setMessageHistory, setIsClicked} = props;
 
 
     const [username, setUsername] = useState('');
@@ -39,7 +39,9 @@ const SignInModal = (props) => {
         // console.log('***** Decoded Token Is: *****');
         // console.log(decodedToken);
         setIsLoggedIn(true)
+        // setMessageHistory([])
         getMessageHistory()
+        window.location.reload()
       } catch (error) {
         console.error('Authentication failed:', error);
       }
@@ -111,6 +113,7 @@ const SignInModal = (props) => {
     classNames={{
       overlay: "customOverlay",
       modal: "customModal",
+      afterOpen: "fade-in active"
     }}
   >
     <div>

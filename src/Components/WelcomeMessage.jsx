@@ -5,7 +5,9 @@ import { TypeAnimation } from 'react-type-animation';
 const WelcomeMessage = () => {
 
     return (
-        <div className="welcome-message">
+
+        setTimeout(() => {
+            <div className="welcome-message">
             <div>
             <TypeAnimation
                 sequence={['Hello, I am a sentiment analysis chatbot. I will try and tell you if what you enter is a positive or negative statement.']}
@@ -17,6 +19,9 @@ const WelcomeMessage = () => {
               />
               </div>
         </div>
+        }, 500)
+
+      
     )
     
 }
