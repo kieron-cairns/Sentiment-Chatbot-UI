@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import SideMenu from './Components/SideMenu';
 import ChatMessages from './Components/ChatMessages';
 import axios from 'axios';
-import './App.css'
 import SignInModal from './Components/SignInModal';
 import { TypeAnimation } from 'react-type-animation';
-import WelcomeMessage from './Components/WelcomeMessage';
+import './App.css'
 
 const App = () => {
   const [messages, setMessages] = useState([]);
@@ -19,28 +18,29 @@ const App = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const [appRefreshed, setAppRefreshed] = useState(false)
 
-
-
   let data; 
-
 
   useEffect(() => {
 
-    
     setAppRefreshed(true)
-    const botResponse = {
-       
-      queryResult: 'Hello, I am a sentiment analysis chatbot. I will try and tell you if what you enter is a positive or negative statement.',
-      sender: 'bot',
-    };
-    setMessageHistory([...messageHistory, botResponse]);
-
+  
     console.log("****** APP REFRESHED *****")
 
     const timer = setTimeout(() => {
       setDisplayModal(true);
       console.log("*** Button Should Display ****")
     }, 2500);
+
+    
+    const botResponse = {
+       
+      queryResult: 'Hello, I am a sentiment analysis chatbot. I will try and tell you if what you enter is a positive or negative statement.',
+      sender: 'bot',
+    };
+    
+
+    setMessageHistory([...messageHistory, botResponse]);
+  
 
     return () => {
       clearTimeout(timer);
@@ -89,17 +89,6 @@ const App = () => {
   }
 
   const getMessageHistory = async () => {
-
-    // console.log('*** Message History Hit - Current Messages Are: ***')
-
-    // console.log(messageHistory)
-
-    // console.log('*** Attempt message history delete - Current Messages Are: ***')
-
-    // setMessageHistory([])
-    // console.log(messageHistory)
-
-    // window.location.reload()
 
     try {
 
@@ -417,9 +406,9 @@ const App = () => {
       } */}
 
       {/* <SignInModal isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
-    {windowWidth >= 900 && <SideMenu messages={messageHistory} isLoggedIn={isLoggedIn} handleSignIn={handleSignIn} handleSignOut={handleSignOut} handleClick={deleteAllItems} />}
+    {windowWidth >= 900 && <SideMenu isLoggedIn={isLoggedIn} handleSignIn={handleSignIn} handleSignOut={handleSignOut} handleClick={deleteAllItems} />}
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <ChatMessages messages={messageHistory} inputMessage={messages} />
+        <ChatMessages messages={messageHistory} />
         {appRefreshed && !isLoggedIn && !isSignedOut && !userHasSubmitted &&(
         <div>
 

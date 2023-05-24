@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-const SideMenu = ({handleSignIn, handleSignOut, handleClick, isLoggedIn, setIsLoggedIn}) => {
+const SideMenu = ({handleSignIn, handleSignOut, handleClick, isLoggedIn}) => {
   
   const [display, setDisplay] = useState(false);
 
