@@ -322,12 +322,15 @@ const App = () => {
 
     // console.log(isClicked)
 
-   
+    // setTimeout(() => {
+    //   setIsClicked(prevState => !prevState)
+    // }, 2500)
 
   }
 
   useEffect(() => {
-console.log(isClicked)
+  console.log('***** IS CLICKED: *****')
+  console.log(isClicked)
   }, [isClicked])
 
   return (
@@ -351,6 +354,8 @@ console.log(isClicked)
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
                 getMessageHistory={getMessageHistory}
+                isClicked={isClicked}
+                setIsClicked={setIsClicked}
               />
           )}
           </FadeIn>
@@ -367,6 +372,8 @@ console.log(isClicked)
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
                 getMessageHistory={getMessageHistory}
+                isClicked={isClicked}
+                setIsClicked={setIsClicked}
               />
           )}
           </FadeIn>

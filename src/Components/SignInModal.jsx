@@ -7,7 +7,7 @@ import FadeIn from 'react-fade-in/lib/FadeIn';
 const SignInModal = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(true);
   
-    const { isLoggedIn, setIsLoggedIn, getMessageHistory } = props;
+    const { isLoggedIn, setIsLoggedIn, getMessageHistory, isClicked, setIsClicked} = props;
 
 
     const [username, setUsername] = useState('');
@@ -95,6 +95,13 @@ const SignInModal = (props) => {
   const handleModalClose = () => {
     console.log('*** MODAL CLOSE ***')
     setIsOpen(false);
+    
+    console.log('*** MODAL SET IS CLICKED CLOSE ***')
+    setIsClicked(false)
+    
+
+
+
     // setIsLoggedIn(false); // Set the boolean variable to false when the modal is closed
   };
 
