@@ -156,6 +156,28 @@ const App = () => {
 
   }
 
+  const displayLoginModal = () => {
+    return (
+      <div>
+      {displayModal && (
+        <SignInModal
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+          getMessageHistory={getMessageHistory}
+          setMessageHistory={setMessageHistory}
+          isClicked={isClicked}
+          setIsClicked={setIsClicked}
+          messageHistory={messageHistory}
+
+        />
+    )}
+    </div>
+    )
+  }
+
+  const handleSignIn = () => {
+
+  }
 
   const handleSignOut = () => {
 
@@ -214,8 +236,7 @@ const App = () => {
     }
 
     const showBotLoginButton = (
-      <button onClick={handleClick}
-      onMouseUp={handleMouseUp}>Login</button>
+      <button onClick={handleClick}>Login</button>
     );
   
     const botMessageContent = !isLoggedIn
@@ -328,15 +349,6 @@ const App = () => {
       }
   };
 
-  function displayLoginModal() {
-    setTimeout(() => {
-      return( <div>
-      <SignInModal isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-      </div>
-      )
-    }, 5000);
-  }
-
   const handleClick = () => {
     // setIsClicked(true);
 
@@ -345,17 +357,6 @@ const App = () => {
 
   };
 
-  const handleMouseUp = () => {
-    // setIsClicked(false)
-    // setIsClicked(prevState => !prevState)
-
-    // console.log(isClicked)
-
-    // setTimeout(() => {
-    //   setIsClicked(prevState => !prevState)
-    // }, 2500)
-
-  }
 
   useEffect(() => {
   console.log('***** IS CLICKED: *****')
@@ -375,43 +376,18 @@ const App = () => {
         <ChatMessages messages={messageHistory} inputMessage={messages} />
         {!isLoggedIn && !userHasSubmitted && (
         <div>
-          {/* <FadeIn delay={400}> */}
 
           <WelcomeMessage />
 
-          {displayModal && (
-              <SignInModal
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-                getMessageHistory={getMessageHistory}
-                setMessageHistory={setMessageHistory}
-                isClicked={isClicked}
-                setIsClicked={setIsClicked}
-                messageHistory={messageHistory}
-
-              />
-          )}
-          {/* </FadeIn> */}
+         {displayLoginModal()}
 
         </div>
       )}
        {!isLoggedIn && isClicked &&(
         <div>
-          {/* <FadeIn delay={400}> */}
+         
+          {displayLoginModal()}
 
-          {/* <WelcomeMessage /> */}
-          {displayModal && (
-              <SignInModal
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-                getMessageHistory={getMessageHistory}
-                setMessageHistory={setMessageHistory}
-                isClicked={isClicked}
-                setIsClicked={setIsClicked}
-                messageHistory={messageHistory}
-              />
-          )}
-          {/* </FadeIn> */}
 
         </div>
       )}
