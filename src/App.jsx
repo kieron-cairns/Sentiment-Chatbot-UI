@@ -6,7 +6,6 @@ import SignInModal from './Components/SignInModal';
 import { TypeAnimation } from 'react-type-animation';
 import './App.css'
 
-
 const App = () => {
   const [messages, setMessages] = useState([]);
   const [messageHistory, setMessageHistory] = useState([]);
@@ -24,20 +23,10 @@ const App = () => {
   useEffect(() => {
 
     setAppRefreshed(true)
-  
-    console.log("****** APP REFRESHED *****")
 
     const timer = setTimeout(() => {
       setDisplayModal(true);
-      console.log("*** Button Should Display ****")
     }, 2500);
-    
-    // const botResponse = {
-       
-    //   queryResult: 'Hello, I am a sentiment analysis chatbot. I will try and tell you if what you enter is a positive or negative statement.',
-    //   sender: 'bot',
-    // };
-    // setMessageHistory([...messageHistory, botResponse]);
   
     return () => {
       clearTimeout(timer);
@@ -50,13 +39,6 @@ const App = () => {
 
   const verifyBeaerToken = async () => {
 
-
-    // if(appRefreshed && !isLoggedIn)
-    // {
-         
-    // }
-
-    console.log('***** TOKEN BEING VERIFIED ****')
     try {
       const beaerUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/VerifyBearer'
       const token = localStorage.getItem('token');
@@ -72,10 +54,8 @@ const App = () => {
 
       const beaerData = await response
 
-      console.log(beaerData)
       if(response.status === 200)
       {
-        console.log("RESPONSE IS 200")
         setIsLoggedIn(true)
         getMessageHistory()
 
@@ -97,8 +77,6 @@ const App = () => {
 
     } catch(error)
     {
-      console.log('*** Beaer is not legit ****')
-
       console.log(error)
       // setIsLoggedIn(false)
       return false
@@ -106,14 +84,10 @@ const App = () => {
   }
 
   const getMessageHistory = async () => {
-
     try {
-
-      console.log('***** MESSAGE HISTORY HIT ****')
       const historyUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/GetQueriesByIp'
       const token = localStorage.getItem('token');
       // Set the authorization header
-
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
       const response = await fetch(historyUrl, {
@@ -130,8 +104,6 @@ const App = () => {
       const updatedMessageHistory = [messageHistory, ...extractedQueryTextArray];
   
       setMessageHistory(updatedMessageHistory);
-
-      // setAppRefreshed(true)
     } catch (error) {
       console.error('Error:', error);
     }
@@ -146,9 +118,6 @@ const App = () => {
   }
 
   const deleteAllItems = async () => {
-    console.log('Button Pressed')
-
-
     try {
 
     const deleteUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/DeleteAllByIp'
@@ -164,10 +133,7 @@ const App = () => {
     })
     
     const responseData = await response.data
-
     setMessageHistory([])
-
-    console.log(responseData)
     }
     catch(error)
     {
@@ -197,42 +163,15 @@ const App = () => {
   }
 
   const handleSignIn = () => {
-    console.log('handle sign in hit')
-    // return (
-    //   <div>
-    //   {displayLoginModal()}
-    //   </div>
-    // )
     setIsClicked(prevState => !prevState)
-
-  }
-
-  const setWelcomeMessage = () => {
-   
-    // setTimeout(() => {
-      const botResponse = {
-       
-        queryResult: 'Blah Blah',
-        sender: 'bot',
-      };
-      setMessageHistory([...messageHistory, botResponse]);
-    // }, 500);
   }
 
   const handleSignOut = () => {
     setMessageHistory([])
-   
-    console.log('sign out is clicked is clciked is: ')
-    setIsClicked(false)
+       setIsClicked(false)
     localStorage.removeItem('token')
-    // console.log(isClicked)
     setIsSignedOut(true)
     setIsLoggedIn(false)
-    // setDisplayModal(false)
-    // setIsClicked(false)
-    // window.location.reload()
-
-
   }
 
   useEffect(() => {
@@ -244,41 +183,21 @@ const App = () => {
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      // verifyBeaerToken()   
     };
     }, []);
 
   useEffect(() => {
-
-    console.log(messageHistory);
-
-    console.log('****** JWT Token *****')
     const token = localStorage.getItem('token');
-    // var token = null
     // Set the authorization header
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    //setIsLoggedIn(token !== undefined || token !== null || verifyBeaerToken !== false);
-
-    console.log(token)
 
   }, []);
 
   useEffect(() => {
-
-
-    console.log('*** Updated Message History - Current Messages Are: ***');
-    console.log(messageHistory);
-
   }, [messageHistory])
 
-
   const handleMessageSubmit = (messageContent) => {
-
-
-    console.log('*** handle message submit hit ***')
-
     const newMessage = {
-    
       queryText: messageContent,
       sender: 'user'
     }
@@ -304,11 +223,6 @@ const App = () => {
       )
       : `Sentiment result is ${data.result.toLowerCase()}`;
   
-
-    console.log(messageHistory)
-
-    console.log('hard coded value added?')
-
       setMessageHistory([...messageHistory, newMessage]);
 
       // Simulate bot response (replace with your own logic)
@@ -330,7 +244,6 @@ const App = () => {
 
       if(!isLoggedIn)
       {
-        console.log('User not logged in')
         handleMessageSubmit(inputValue);
         setInputValue('');
       }
@@ -349,7 +262,6 @@ const App = () => {
 
           // Set the authorization header
           // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
           const response = await axios.post(postSqlUrl, body, {
             headers: {
               'Content-Type': 'application/json',
@@ -357,18 +269,15 @@ const App = () => {
             },
           });
 
-
           //Is beaer token expires, make the user re-login
 
           if(response.status === 401)
           {
             setMessageHistory([])
             setIsLoggedIn(false)
-
           }
 
           data = response.data
-          
 
           try {
             data = await response.data
@@ -377,20 +286,12 @@ const App = () => {
             console.error('Error parsing JSON response:', error);
             return;
           }
-
-          console.log("************* response data ***************")
-          console.log(response)
-
-          console.log('Message History: ')
-          console.log(messageHistory);
-
           handleMessageSubmit(inputValue);
           setInputValue('');
-          console.log(messageHistory);
 
         } catch (error) {
           setMessageHistory([])
-            setIsLoggedIn(false)
+          setIsLoggedIn(false)
           console.error('Error:', error);
 
         }
@@ -402,18 +303,10 @@ const App = () => {
   };
 
   useEffect(() => {
-  console.log('***** IS CLICKED: *****')
-  console.log(isClicked)
   }, [isClicked])
 
   return (
     <div className="chatbot-container">
-      {/* {isLoggedIn === false && 
-
-        <h1>Hello World</h1>
-      } */}
-
-      {/* <SignInModal isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
     {windowWidth >= 900 && <SideMenu isLoggedIn={isLoggedIn} handleSignIn={handleSignIn} handleSignOut={handleSignOut} handleClick={deleteAllItems} />}
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ChatMessages messages={messageHistory} />
