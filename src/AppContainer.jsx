@@ -20,11 +20,6 @@ const AppContainer = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const [appRefreshed, setAppRefreshed] = useState(false)
 
-  var bearerLinkUrl = "https://localhost:7282/VerifyBearer"
-  var historyLinkUrl = "https://localhost:7282/GetQueriesByIp"
-  var deleteLinkUrl = "https://localhost:7282/DeleteAllByIp"
-  var postToSqLinklUrl = "https://localhost:7282/PostQueryToSql"
-
   let data; 
 
   useEffect(() => {
@@ -107,10 +102,7 @@ const AppContainer = () => {
   const deleteAllItems = async () => {
     try {
 
-    const deleteUrl = deleteLinkUrl
     const token = localStorage.getItem('token');
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
    const response = await apiDeleteAllItems(token)
     
     const responseData = await response.data
@@ -120,7 +112,6 @@ const AppContainer = () => {
     {
       console.log(error)
     }
-
   }
 
   const displayLoginModal = () => {
@@ -233,7 +224,6 @@ const AppContainer = () => {
         if (inputValue.trim() === '') {
           return;
         }
-        const postSqlUrl = postToSqLinklUrl;
 
         const body = JSON.stringify({ SentimentText: inputValue });
 
@@ -243,14 +233,7 @@ const AppContainer = () => {
 
           // Set the authorization header
           // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          const response = await axios.post(postSqlUrl, body, {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
-            },
-          });
-
-          //Is beaer token expires, make the user re-login
+          const response = await apiPostQueryToSql(token, body)
 
           if(response.status === 401)
           {

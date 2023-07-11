@@ -40,6 +40,13 @@ export const apiDeleteAllItems = async (token) => {
 
 export const apiPostQueryToSql = async (token, body) => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    const response = await axios.post(`${postToSqLinklUrl}/PostQueryToSql`, body);
+    
+    const response = await axios.post(`${baseUrl}/PostQueryToSql`, body, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+
     return response;
 }
