@@ -18,6 +18,11 @@ const App = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const [appRefreshed, setAppRefreshed] = useState(false)
 
+  var bearerLinkUrl = "https://localhost:7282/VerifyBearer"
+  var historyLinkUrl = "https://localhost:7282/GetQueriesByIp"
+  var deleteLinkUrl = "https://localhost:7282/DeleteAllByIp"
+  var postToSqLinklUrl = "https://localhost:7282/PostQueryToSql"
+
   let data; 
 
   useEffect(() => {
@@ -40,7 +45,7 @@ const App = () => {
   const verifyBeaerToken = async () => {
 
     try {
-      const beaerUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/VerifyBearer'
+      const beaerUrl = bearerLinkUrl
       const token = localStorage.getItem('token');
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
@@ -85,7 +90,7 @@ const App = () => {
 
   const getMessageHistory = async () => {
     try {
-      const historyUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/GetQueriesByIp'
+      const historyUrl = historyLinkUrl
       const token = localStorage.getItem('token');
       // Set the authorization header
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -120,7 +125,7 @@ const App = () => {
   const deleteAllItems = async () => {
     try {
 
-    const deleteUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/DeleteAllByIp'
+    const deleteUrl = deleteLinkUrl
     const token = localStorage.getItem('token');
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
@@ -252,7 +257,7 @@ const App = () => {
         if (inputValue.trim() === '') {
           return;
         }
-        const postSqlUrl = 'https://text-sentiment-analyser-web-api.azurewebsites.net/PostToSql';
+        const postSqlUrl = postToSqLinklUrl;
 
         const body = JSON.stringify({ SentimentText: inputValue });
 

@@ -24,7 +24,10 @@ const SignInModal = (props) => {
           'password' : password
         };
     
-        const response = await axios.post('https://text-sentiment-analyser-web-api.azurewebsites.net/AuthenticateUser', {}, {
+    
+        var authenticateUrl = "https://localhost:7282/AuthenticateUser"
+
+        const response = await axios.post(authenticateUrl, {}, {
           headers: headers
         });
         
