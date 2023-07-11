@@ -6,7 +6,7 @@ import SignInModal from './Components/SignInModal';
 import { TypeAnimation } from 'react-type-animation';
 import './App.css'
 import AppPresentation from './AppPresentation';
-import { verifyBearerToken, retrieveMessageHistory, deleteAllItems, postQueryToSql } from './Service/apiService';
+import { apiVerifyBearerToken, apiDeleteAllItems, apiPostQueryToSql, apiGetMessageHistory } from './Service/apiService';
 
 const AppContainer = () => {
   const [messages, setMessages] = useState([]);
@@ -49,7 +49,7 @@ const AppContainer = () => {
     try {
      
       const token = localStorage.getItem('token');
-        const response = await verifyBearerToken(token);
+        const response = await apiVerifyBearerToken(token);
 
       if(response.status === 200)
       {
@@ -83,7 +83,7 @@ const AppContainer = () => {
     try {
       const token = localStorage.getItem('token');
       
-      const response = await retrieveMessageHistory(token)
+      const response = await apiGetMessageHistory(token)
       const jsonData = await response.json()
   
       const extractedQueryTextArray = jsonData.map(item => ({ queryText: item.queryText, queryResult: 'Sentiment result is ' + item.queryResult.toLowerCase() }));
@@ -111,13 +111,7 @@ const AppContainer = () => {
     const token = localStorage.getItem('token');
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-   const response = await fetch(deleteUrl, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      },
-    })
+   const response = await apiDeleteAllItems(token)
     
     const responseData = await response.data
     setMessageHistory([])

@@ -6,13 +6,13 @@ const historyLinkUrl = "https://localhost:7282/GetQueriesByIp"
 const deleteLinkUrl = "https://localhost:7282/DeleteAllByIp"
 const postToSqLinklUrl = "https://localhost:7282/PostQueryToSql"
 
-export const verifyBearerToken = async (token) => {
+export const apiVerifyBearerToken = async (token) => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     const response = await axios.get(`${baseUrl}/VerifyBearer`);
     return response;
 }
 
-export const retrieveMessageHistory = async (token) => {
+export const apiGetMessageHistory = async (token) => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
      const response = await fetch(`${baseUrl}/GetQueriesByIp`, {
         method: 'GET',
@@ -24,13 +24,21 @@ export const retrieveMessageHistory = async (token) => {
     return response;
 }
 
-export const deleteAllItems = async (token) => {
+export const apiDeleteAllItems = async (token) => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    const response = await axios.delete(`${deleteLinkUrl}/DeleteAllByIp`);
+    
+ const response = await fetch(`${baseUrl}/DeleteAllByIp`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+
     return response;
 }
 
-export const postQueryToSql = async (token, body) => {
+export const apiPostQueryToSql = async (token, body) => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     const response = await axios.post(`${postToSqLinklUrl}/PostQueryToSql`, body);
     return response;
