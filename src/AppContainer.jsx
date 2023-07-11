@@ -6,7 +6,7 @@ import SignInModal from './Components/SignInModal';
 import { TypeAnimation } from 'react-type-animation';
 import './App.css'
 import AppPresentation from './AppPresentation';
-import { verifyBearerToken, getMessageHistory, deleteAllItems, postQueryToSql } from './Service/apiService';
+import { verifyBearerToken, retrieveMessageHistory, deleteAllItems, postQueryToSql } from './Service/apiService';
 
 const AppContainer = () => {
   const [messages, setMessages] = useState([]);
@@ -81,19 +81,10 @@ const AppContainer = () => {
 
   const getMessageHistory = async () => {
     try {
-      const historyUrl = historyLinkUrl
       const token = localStorage.getItem('token');
-      // Set the authorization header
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-      const response = await fetch(historyUrl, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-      },
-      });
-      const jsonData = await response.json();
+      
+      const response = await retrieveMessageHistory(token)
+      const jsonData = await response.json()
   
       const extractedQueryTextArray = jsonData.map(item => ({ queryText: item.queryText, queryResult: 'Sentiment result is ' + item.queryResult.toLowerCase() }));
   
