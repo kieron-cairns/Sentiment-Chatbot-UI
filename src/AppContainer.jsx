@@ -6,6 +6,7 @@ import SignInModal from './Components/SignInModal';
 import { TypeAnimation } from 'react-type-animation';
 import './App.css'
 import AppPresentation from './AppPresentation';
+import { verifyBearerToken, getMessageHistory, deleteAllItems, postQueryToSql } from './Service/apiService';
 
 const AppContainer = () => {
   const [messages, setMessages] = useState([]);
@@ -46,19 +47,9 @@ const AppContainer = () => {
   const verifyBeaerToken = async () => {
 
     try {
-      const beaerUrl = bearerLinkUrl
+     
       const token = localStorage.getItem('token');
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-      const response = await fetch(beaerUrl, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        }
-      })
-
-      const beaerData = await response
+        const response = await verifyBearerToken(token);
 
       if(response.status === 200)
       {
@@ -84,7 +75,6 @@ const AppContainer = () => {
     } catch(error)
     {
       console.log(error)
-      // setIsLoggedIn(false)
       return false
     }
   }
