@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import { apiAuthenticateUser } from '../Service/apiService';
 
 const SignInModal = (props) => {
   const [modalIsOpen, setIsOpen] = useState(true);
@@ -18,31 +19,19 @@ const SignInModal = (props) => {
 
       try {
     
-        const headers = {
+        const token = await apiAuthenticateUser(username, password);
     
-          'username' : username,
-          'password' : password
-        };
-    
-    
-        var authenticateUrl = "https://localhost:7282/AuthenticateUser"
-
-        const response = await axios.post(authenticateUrl, {}, {
-          headers: headers
-        });
-        
-        
         // Store the token in local storage
-        localStorage.setItem('token', response.data);
+        localStorage.setItem('token', token);
         console.log('***** token is *****');
-        console.log(response.data);
-
+        console.log(token);
+    
         setIsLoggedIn(true)
         setMessageHistory([])
         setAppRefreshed(false)
-
+    
         console.log("****** APP REFRESHED: " +  + "*****")
-
+    
         getMessageHistory()
       } catch (error) {
         setInvalidCreds(true)

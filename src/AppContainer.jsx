@@ -140,7 +140,7 @@ const AppContainer = () => {
 
   const handleSignOut = () => {
     setMessageHistory([])
-       setIsClicked(false)
+    setIsClicked(false)
     localStorage.removeItem('token')
     setIsSignedOut(true)
     setIsLoggedIn(false)

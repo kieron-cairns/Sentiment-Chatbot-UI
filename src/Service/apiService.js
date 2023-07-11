@@ -46,3 +46,19 @@ export const apiPostQueryToSql = async (token, body) => {
 
     return response;
 }
+
+export const apiAuthenticateUser = async(username, password) => {
+
+  const headers = {
+    
+    'username' : username,
+    'password' : password
+  };
+
+  const response = await axios.post(`${baseUrl}/AuthenticateUser`, {} , {
+      headers: headers
+  });
+
+  return response.data;
+
+}
