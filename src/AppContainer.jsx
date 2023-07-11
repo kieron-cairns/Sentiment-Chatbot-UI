@@ -5,6 +5,7 @@ import axios from 'axios';
 import SignInModal from './Components/SignInModal';
 import { TypeAnimation } from 'react-type-animation';
 import './App.css'
+import AppPresentation from './AppPresentation';
 
 const AppContainer = () => {
   const [messages, setMessages] = useState([]);
@@ -310,33 +311,8 @@ const AppContainer = () => {
   useEffect(() => {
   }, [isClicked])
 
-  return (
-    <div className="chatbot-container">
-    {windowWidth >= 900 && <SideMenu isLoggedIn={isLoggedIn} handleSignIn={handleSignIn} handleSignOut={handleSignOut} handleClick={deleteAllItems} />}
-      <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <ChatMessages messages={messageHistory} />
-        {appRefreshed && !isLoggedIn && !isSignedOut && !userHasSubmitted &&(
-        <div>
-         {displayLoginModal()}
-        </div>
-      )}
-       {!isLoggedIn && isClicked &&(
-        <div>
-          {displayLoginModal()}
-        </div>
-      )}
-        <form className="chatbot-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Type a message..."
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
-          <button className='chatbot-form-button' type="submit">Send</button>
-        </form>
-      </div>
-    </div>
-  );
-};
+  return <AppPresentation isLoggedIn={isLoggedIn} messageHistory={messageHistory} handleSignIn={handleSignIn} handleSignOut={handleSignOut} deleteAllItems={deleteAllItems} handleSubmit={handleSubmit} windowWidth={windowWidth} appRefreshed={appRefreshed} isSignedOut={isSignedOut} userHasSubmitted={userHasSubmitted} displayLoginModal={displayLoginModal} isClicked={isClicked} inputValue={inputValue} setInputValue={setInputValue} />;
+
+}
 
 export default AppContainer;
