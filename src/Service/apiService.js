@@ -1,10 +1,6 @@
 import axios from 'axios';
 
 const baseUrl = "https://localhost:7282";
-const bearerLinkUrl = "https://localhost:7282/VerifyBearer"
-const historyLinkUrl = "https://localhost:7282/GetQueriesByIp"
-const deleteLinkUrl = "https://localhost:7282/DeleteAllByIp"
-const postToSqLinklUrl = "https://localhost:7282/PostQueryToSql"
 
 export const apiVerifyBearerToken = async (token) => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
