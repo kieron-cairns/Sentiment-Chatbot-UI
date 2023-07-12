@@ -1,3 +1,11 @@
+# Sentiment Chatbot React UI
+
+This is the frontend React UI for a chatbot that provides simple sentiment analysis based on the text inputted, see the backend API here: https://github.com/kieron-cairns/SentimentChatbotWebAPI
+
+
+![8b62626d-a345-499d-b70a-a97b6da65f98](https://github.com/kieron-cairns/Sentiment-Chatbot-UI/assets/72394263/9b08daf4-f0e1-4172-9e0a-d4cdb56eafb2)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
