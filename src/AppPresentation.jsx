@@ -1,7 +1,7 @@
 import React from 'react';
 import SideMenu from './Components/SideMenu';
-import ChatMessages from './Components/ChatMessages';
 import SignInModal from './Components/SignInModal';
+import ChatMessagesContainer from './Components/ChatMessagesContainer';
 
 const AppPresentation = ({ isLoggedIn, messageHistory, handleSignIn, handleSignOut, deleteAllItems, handleSubmi, windowWidth, appRefreshed, isSignedOut, userHasSubmitted, displayLoginModal, isClicked, handleSubmit, inputValue, setInputValue}) => {
   // ... Your presentational logic
@@ -10,7 +10,7 @@ const AppPresentation = ({ isLoggedIn, messageHistory, handleSignIn, handleSignO
     <div className="chatbot-container">
       {windowWidth >= 900 && <SideMenu isLoggedIn={isLoggedIn} handleSignIn={handleSignIn} handleSignOut={handleSignOut} handleClick={deleteAllItems} />}
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <ChatMessages messages={messageHistory} />
+        <ChatMessagesContainer messages={messageHistory} />
         {appRefreshed && !isLoggedIn && !isSignedOut && !userHasSubmitted && displayLoginModal()}
         {!isLoggedIn && isClicked && displayLoginModal()}
         <form className="chatbot-form" onSubmit={handleSubmit}>

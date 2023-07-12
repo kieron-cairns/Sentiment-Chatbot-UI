@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import SideMenu from './Components/SideMenu';
-import ChatMessages from './Components/ChatMessages';
 import axios from 'axios';
 import SignInModal from './Components/SignInModal';
 import { TypeAnimation } from 'react-type-animation';

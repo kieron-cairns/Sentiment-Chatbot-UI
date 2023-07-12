@@ -1,21 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { TypeAnimation } from 'react-type-animation';
 
-const ChatMessages = ({ inputMessage, messages }) => {
-  const messagesEndRef = useRef(null);
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-  };
+const ChatMessagesPresentation = ({ inputMessage, messages, messagesEndRef }) => {
 
   return (
     <div className="chatbot-messages">
-     
-      
+           
       {messages.map((message, index) => (
         <div className="loadedHistoryChat" key={index} style={{ textAlign: 'center' }}>
           <div>
@@ -46,4 +36,4 @@ const ChatMessages = ({ inputMessage, messages }) => {
   );
 };
 
-export default ChatMessages;
+export default ChatMessagesPresentation;
