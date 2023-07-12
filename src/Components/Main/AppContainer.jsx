@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import SideMenu from './Components/SideMenu';
+import SideMenu from '../SideMenu/SideMenu';
 import axios from 'axios';
-import SignInModal from './Components/SignInModal';
+import SignInModal from '../SignIn/SignInModal';
 import { TypeAnimation } from 'react-type-animation';
 import './App.css'
 import AppPresentation from './AppPresentation';
-import { apiVerifyBearerToken, apiDeleteAllItems, apiPostQueryToSql, apiGetMessageHistory } from './Service/apiService';
+import { apiVerifyBearerToken, apiDeleteAllItems, apiPostQueryToSql, apiGetMessageHistory } from '../../Service/apiService';
 
 const AppContainer = () => {
   const [messages, setMessages] = useState([]);

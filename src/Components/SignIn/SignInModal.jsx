@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import { apiAuthenticateUser } from '../Service/apiService';
+import { apiAuthenticateUser } from '../../Service/apiService';
 
 const SignInModal = (props) => {
   const [modalIsOpen, setIsOpen] = useState(true);
