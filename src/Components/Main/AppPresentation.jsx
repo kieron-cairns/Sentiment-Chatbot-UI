@@ -1,13 +1,13 @@
 import React from 'react';
-import SideMenu from '../SideMenu/SideMenu';
 import ChatMessagesContainer from '../ChatMessages/ChatMessagesContainer';
+import SideMenuContainer from '../SideMenu/SideMenuContainer';
 
 const AppPresentation = ({ isLoggedIn, messageHistory, handleSignIn, handleSignOut, deleteAllItems, handleSubmi, windowWidth, appRefreshed, isSignedOut, userHasSubmitted, displayLoginModal, isClicked, handleSubmit, inputValue, setInputValue}) => {
   // ... Your presentational logic
 
   return (
     <div className="chatbot-container">
-      {windowWidth >= 900 && <SideMenu isLoggedIn={isLoggedIn} handleSignIn={handleSignIn} handleSignOut={handleSignOut} handleClick={deleteAllItems} />}
+      {windowWidth >= 900 && <SideMenuContainer isLoggedIn={isLoggedIn} handleSignIn={handleSignIn} handleSignOut={handleSignOut} handleClick={deleteAllItems} />}
       <div className="chat-window" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <ChatMessagesContainer messages={messageHistory} />
         {appRefreshed && !isLoggedIn && !isSignedOut && !userHasSubmitted && displayLoginModal()}

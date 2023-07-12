@@ -1,15 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
-const SideMenu = ({handleSignIn, handleSignOut, handleClick, isLoggedIn}) => {
+const SideMenuPresentation = ({handleSignIn, handleSignOut, handleClick, isLoggedIn, display}) => {
   
-  const [display, setDisplay] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDisplay(true)
-    }, 325);
-  }) 
-
   return (
     <div className="side-menu">
       <h2>Sentiment Analysis Chat Bot</h2>
@@ -29,4 +21,4 @@ const SideMenu = ({handleSignIn, handleSignOut, handleClick, isLoggedIn}) => {
   );
 };
 
-export default SideMenu;
+export default SideMenuPresentation;

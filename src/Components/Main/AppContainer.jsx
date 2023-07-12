@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import SideMenu from '../SideMenu/SideMenu';
 import axios from 'axios';
 import { TypeAnimation } from 'react-type-animation';
 import './App.css'
