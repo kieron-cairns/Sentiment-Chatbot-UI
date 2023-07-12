@@ -1,6 +1,5 @@
 import React from 'react';
 import SideMenu from '../SideMenu/SideMenu';
-import SignInModal from '../SignIn/SignInModal';
 import ChatMessagesContainer from '../ChatMessages/ChatMessagesContainer';
 
 const AppPresentation = ({ isLoggedIn, messageHistory, handleSignIn, handleSignOut, deleteAllItems, handleSubmi, windowWidth, appRefreshed, isSignedOut, userHasSubmitted, displayLoginModal, isClicked, handleSubmit, inputValue, setInputValue}) => {
